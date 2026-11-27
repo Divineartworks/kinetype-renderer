@@ -45,6 +45,30 @@ export async function launch() {
   });
 }
 
+/**
+ * A browser shared across items that survives a Chrome crash: get() returns the
+ * live browser, launching a fresh one when the last one disconnected. The item
+ * whose browser died still fails with its own error; only later items relaunch.
+ */
+export function liveBrowser(launchFn = launch) {
+  let browser = null;
+  return {
+    async get() {
+      if (browser && browser.isConnected()) return browser;
+      if (browser) await browser.close().catch(() => {});
+      const b = await launchFn();
+      b.on('disconnected', () => { if (browser === b) browser = null; });
+      browser = b;
+      return b;
+    },
+    async close() {
+      const b = browser;
+      browser = null;
+      if (b) await b.close().catch(() => {});
+    },
+  };
+}
+
 /** Open a runtime page in its own context (own renderer process) and load the spec. */
 export async function openRuntime(browser, baseUrl, resolved) {
   const context = await browser.newContext({ viewport: { width: 800, height: 600 }, deviceScaleFactor: 1 });

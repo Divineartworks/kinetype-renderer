@@ -6,14 +6,14 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { ROOT, startServer } from './server.js';
-import { launch, openRuntime, chromePath, withTimeout } from './browser.js';
+import { launch, liveBrowser, openRuntime, chromePath, withTimeout } from './browser.js';
 import { validate, resolve as resolveSpec } from './spec.js';
 
 function probe(cmd, args) {
   try { return execFileSync(cmd, args, { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'] }).toString().split('\n')[0].trim(); } catch { return null; }
 }
 
-export async function check({ only, log = console.error } = {}) {
+export async function check({ only, log = console.error, launch: launchFn = launch } = {}) {
   const env = {
     node: process.version,
     chrome: chromePath(),
@@ -25,7 +25,8 @@ export async function check({ only, log = console.error } = {}) {
   const results = [];
   const roots = {};
   const srv = await startServer({ extraRoots: roots });
-  const browser = await launch();
+  // one Chrome crash must fail at most the example it hit, never every later one
+  const browsers = liveBrowser(launchFn);
   try {
     for (const f of files) {
       const p = path.join(ROOT, 'examples', f);
@@ -36,7 +37,7 @@ export async function check({ only, log = console.error } = {}) {
         const problems = await validate(spec, { specDir: path.dirname(p) });
         if (problems.length) throw new Error('invalid: ' + problems.join('; '));
         const resolved = await resolveSpec(spec, { specDir: path.dirname(p), roots });
-        const rt = await openRuntime(browser, srv.url, resolved);
+        const rt = await openRuntime(await browsers.get(), srv.url, resolved);
         const D = rt.info.duration;
         const times = [0.013, D * 0.37, D * 0.71, D - 1 / rt.info.fps];
         const hashAll = async (order) => {
@@ -70,7 +71,7 @@ export async function check({ only, log = console.error } = {}) {
       results.push(r);
     }
   } finally {
-    await browser.close();
+    await browsers.close();
     await srv.close();
   }
   return { env, results, ok: results.every((r) => r.ok) && !!env.chrome && !!env.ffmpeg };
