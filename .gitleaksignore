@@ -1,0 +1,4 @@
+# Fake tokens (e.g. sk-live-ABCDEFGHIJKLMNOP1234) used to test the secret redactor. Not real credentials.
+test/helpers/explore-fixture.js:generic-api-key:14
+test/explore.test.js:generic-api-key:71
+test/explore.test.js:generic-api-key:89
