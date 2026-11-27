@@ -1,0 +1,11 @@
+{
+  "schema": "kinetype.session.v1",
+  "devices": [
+    { "id": "owner", "capture": "owner/capture.json" },
+    { "id": "customer", "capture": "customer/capture.json" }
+  ],
+  "sync": [
+    { "from": "customer:approve", "to": "owner:approved" }
+  ],
+  "note": "owner sessionOffset 0; customer sessionOffset 13.583333 so the customer's 'approve' tap (customer t=4.0 s) lands at session 17.583333 s, 0.4 s before the owner's notification payoff (owner mark 'notify' t=17.983333 s)."
+}

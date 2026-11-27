@@ -1,0 +1,116 @@
+{
+  "template": "ui-demo",
+  "name": "ui-demo-real-ad20",
+  "format": "vertical",
+  "fps": 30,
+  "seed": 11,
+  "media": {
+    "own": {
+      "capture": "../fixtures/real/owner/capture.json"
+    },
+    "cust": {
+      "capture": "../fixtures/real/customer/capture.json"
+    }
+  },
+  "content": {
+    "session": {
+      "devices": [
+        {
+          "id": "owner",
+          "capture": "own",
+          "label": "Ola (eier)"
+        },
+        {
+          "id": "customer",
+          "capture": "cust",
+          "label": "Kari (kunde)"
+        }
+      ],
+      "clock": "14:02:28"
+    },
+    "frame": "none",
+    "retime": "auto",
+    "open": {
+      "at": "owner:notify+0.35",
+      "dur": 1.5
+    },
+    "beats": [
+      {
+        "at": "owner:new-item",
+        "t": 3.74
+      },
+      {
+        "at": "owner:desc",
+        "t": 5.5
+      },
+      {
+        "at": "owner:send",
+        "t": 7.9
+      },
+      {
+        "at": "customer:approve",
+        "t": 11.7
+      }
+    ],
+    "captions": [
+      {
+        "at": 0.25,
+        "text": "Godkjent på sekunder",
+        "dur": 1.3
+      },
+      {
+        "at": "owner:send",
+        "text": "Rett til kunden",
+        "dur": 1.4
+      },
+      {
+        "at": "owner:counter",
+        "offset": 1.2,
+        "text": "Skriftlig. Klart til faktura.",
+        "dur": 2.8
+      }
+    ],
+    "minDuration": 18.0,
+    "edit": [
+      {
+        "device": "owner",
+        "from": "owner:new-item-1.0",
+        "to": "owner:sent-ok+0.95"
+      },
+      {
+        "device": "customer",
+        "from": "customer:approve-1.0",
+        "to": "customer:approved+0.7"
+      },
+      {
+        "device": "owner",
+        "from": "owner:notify-0.25",
+        "to": "owner:counted",
+        "focus": {
+          "box": {
+            "x": 48,
+            "y": 930,
+            "w": 984,
+            "h": 720
+          },
+          "at": "counter"
+        }
+      }
+    ]
+  },
+  "palette": {
+    "bg": "#EEF0EE",
+    "night": "#DCE1DE",
+    "ink": "#0F1A17",
+    "paper": "#FBFCFB",
+    "chrome": "#F3F2EF",
+    "chromeInk": "#5D6067",
+    "accent": "#0E6B58"
+  },
+  "render": {
+    "shutter": 0.5
+  },
+  "params": {
+    "clockChip": "switch"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "template": "ascii-cam",
+  "name": "ascii-cam-halftone",
+  "format": "vertical",
+  "bpm": 100,
+  "seed": 3,
+  "duration": 10,
+  "media": {
+    "clip": {
+      "src": "../fixtures/footage-abstract.mp4",
+      "loop": true
+    }
+  },
+  "content": {
+    "headline": "SIGNAL",
+    "sub": "KINETYPE \u2014 ASCII CAM",
+    "mode": "duotone"
+  },
+  "params": {
+    "style": "halftone"
+  }
+}

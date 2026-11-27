@@ -1,0 +1,28 @@
+{
+  "template": "echo-stack",
+  "name": "echo-stack-strobe",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 12,
+  "loop": true,
+  "bpm": 120,
+  "seed": 11,
+  "content": {
+    "words": [
+      "RAVE"
+    ],
+    "message": "ALL NIGHT RAVE",
+    "sub": "SAT 23:00 \u2014 BUNKER"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 19
+    },
+    "loopExact": true
+  },
+  "params": {
+    "style": "strobe"
+  }
+}

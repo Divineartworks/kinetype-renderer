@@ -1,0 +1,36 @@
+{
+  "template": "marquee-bands",
+  "name": "marquee-bands-stack",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 16,
+  "loop": true,
+  "bpm": 120,
+  "seed": 5,
+  "content": {
+    "bands": [
+      {
+        "text": "SEASON 3"
+      },
+      {
+        "text": "NEW EPISODES"
+      },
+      {
+        "text": "EVERY FRIDAY"
+      }
+    ],
+    "title": "SEASON 3",
+    "subtitle": "PREMIERES OCT 03"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 28
+    },
+    "loopExact": true
+  },
+  "params": {
+    "style": "stack"
+  }
+}

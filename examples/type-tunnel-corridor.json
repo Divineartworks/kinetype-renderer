@@ -1,0 +1,29 @@
+{
+  "template": "type-tunnel",
+  "name": "type-tunnel-corridor",
+  "format": "landscape",
+  "fps": 60,
+  "duration": 14,
+  "bpm": 120,
+  "seed": 5,
+  "content": {
+    "words": [
+      "KEEP GOING",
+      "NO EXIT",
+      "ALMOST THERE",
+      "DON'T STOP"
+    ],
+    "finale": "ARRIVAL",
+    "sub": "A SHORT FILM"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 22
+    }
+  },
+  "params": {
+    "style": "corridor"
+  }
+}

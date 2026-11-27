@@ -1,0 +1,25 @@
+<!doctype html>
+<!-- Highlight-accuracy fixture (test/highlight.test.js): solid-colour targets whose exact
+     rectangles can be found again in rendered frames. #row sits in a scrolling list; #open
+     opens a modal that covers everything behind it; #see is inside the modal. -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<style>
+  html, body { margin: 0; background: #fff; font: 14px sans-serif; }
+  #list { position: absolute; left: 40px; top: 80px; width: 360px; height: 300px; overflow: auto; background: #eef0f3; }
+  .r { height: 60px; margin: 10px; background: #d5d9df; }
+  #row { background: #ff00ff; }
+  #open { position: absolute; left: 520px; top: 120px; width: 200px; height: 60px; border: 0; background: #00c853; }
+  #backdrop { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.55); }
+  #dialog { display: none; position: fixed; left: 480px; top: 300px; width: 420px; height: 220px; background: #fff; }
+  #see { position: absolute; left: 90px; top: 80px; width: 240px; height: 60px; background: #0050ff; }
+  body.modal #backdrop, body.modal #dialog { display: block; }
+</style>
+<div id="list">
+  <div class="r"></div><div class="r"></div><div class="r"></div>
+  <div class="r" id="row" role="button" aria-label="Row"></div>
+  <div class="r"></div><div class="r"></div><div class="r"></div><div class="r"></div><div class="r"></div>
+</div>
+<button id="open" aria-label="Open" onclick="document.body.classList.add('modal')"></button>
+<div id="backdrop"></div>
+<div id="dialog" role="dialog"><div id="see"></div></div>

@@ -1,0 +1,20 @@
+{
+  "template": "brutalist-terminal",
+  "name": "brutalist-terminal-vertical",
+  "format": "vertical",
+  "fps": 60,
+  "bpm": 128,
+  "seed": 9,
+  "palette": { "a": "#B8FF00" },
+  "content": {
+    "title": "deploy  --  prod",
+    "prompt": "$",
+    "steps": [
+      { "cmd": "git push origin main", "output": [{ "text": "3 commits  /  +412 -38", "dim": true }] },
+      { "cmd": "make test", "output": [{ "progress": "tests", "beats": 4 }, { "text": "1847 passed  0 failed", "highlight": true }] },
+      { "cmd": "make deploy", "output": [{ "progress": "rollout", "beats": 2 }, "live in 41s"] }
+    ],
+    "statement": "GREEN ON FRIDAY",
+    "sub": "no rollback needed."
+  }
+}

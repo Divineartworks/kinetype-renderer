@@ -1,0 +1,27 @@
+{
+  "template": "extrude-3d",
+  "name": "extrude-3d-neon-tube",
+  "format": "landscape",
+  "fps": 60,
+  "duration": 12,
+  "bpm": 120,
+  "seed": 3,
+  "content": {
+    "cards": [
+      "OPEN",
+      "LATE",
+      "ALWAYS OPEN"
+    ],
+    "sub": "24/7 \u2014 DINER NO. 9"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 20
+    }
+  },
+  "params": {
+    "style": "neon-tube"
+  }
+}

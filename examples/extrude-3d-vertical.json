@@ -1,0 +1,26 @@
+{
+  "template": "extrude-3d",
+  "name": "extrude-3d-vertical",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 12,
+  "bpm": 120,
+  "seed": 3,
+  "content": {
+    "cards": [
+      "NEW",
+      "DROP",
+      "SOLD",
+      "OUT",
+      "RESTOCK FRIDAY"
+    ],
+    "sub": "ONLINE ONLY — 18:00 CET"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 20
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "template": "editorial-serif",
+  "name": "editorial-serif-hindi",
+  "format": "landscape",
+  "fonts": {
+    "serif": {
+      "family": "Noto Serif Devanagari",
+      "weight": 500
+    },
+    "italic": {
+      "family": "Noto Serif Devanagari",
+      "weight": 700,
+      "style": "normal"
+    }
+  },
+  "content": {
+    "mode": "title",
+    "number": "07",
+    "section": "Long read",
+    "headline": "\u0936\u092c\u094d\u0926 \u091c\u094b \u091a\u0932\u0924\u0947 \u0939\u0948\u0902",
+    "standfirst": "A Devanagari headline shaped by HarfBuzz: conjuncts, matras and reordering intact."
+  }
+}

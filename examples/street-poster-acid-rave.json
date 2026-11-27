@@ -1,0 +1,42 @@
+{
+  "template": "street-poster",
+  "format": "vertical",
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 35
+    },
+    "loopExact": true
+  },
+  "fps": 60,
+  "duration": 20,
+  "loop": true,
+  "bpm": 120,
+  "seed": 7,
+  "content": {
+    "open": "LOUDER NOW",
+    "thesisA": "THE NIGHT ISN\u2019T OVER",
+    "thesisB": "THE DROP IS",
+    "proof": "BASS > SLEEP",
+    "prompt": [
+      "> BPM: 140",
+      "> LIGHTS: STROBE",
+      "> EXIT: NEVER"
+    ],
+    "cta": "STAY FOR THE DROP",
+    "handle": "@ WAREHOUSE9",
+    "crumbs": [
+      "140 BPM",
+      "STROBE",
+      "B2B",
+      "ALL NIGHT",
+      "NO PHONES",
+      "SAT 23:00"
+    ]
+  },
+  "name": "street-poster-acid-rave",
+  "params": {
+    "style": "acid-rave"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "template": "split-flap",
+  "name": "split-flap-vertical",
+  "format": "vertical",
+  "fps": 60,
+  "bpm": 110,
+  "seed": 4,
+  "palette": { "a": "#B8FF00", "b": "#FF2BD6" },
+  "content": {
+    "title": "LAUNCH WEEK",
+    "rows": [
+      { "text": "MON  BETA OPENS", "status": "LIVE", "statusColor": "a" },
+      { "text": "TUE  API DOCS", "status": "SHIPPED" },
+      { "text": "WED  PRICING", "status": "SOON", "statusColor": "b", "then": { "status": "SHIPPED", "statusColor": "a" } },
+      { "text": "THU  MOBILE APP", "status": "SOON" },
+      { "text": "FRI  AMA 18:00", "status": "RSVP", "statusColor": "a" }
+    ]
+  }
+}

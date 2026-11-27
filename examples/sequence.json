@@ -1,0 +1,79 @@
+{
+  "template": "sequence",
+  "name": "sequence-chapter-edit",
+  "format": "landscape",
+  "bpm": 100,
+  "seed": 5,
+  "content": {
+    "shots": [
+      {
+        "template": "swiss-grid",
+        "content": {
+          "number": "01",
+          "kicker": "CHAPTER ONE",
+          "title": "The workflow is the product",
+          "subtitle": "Same model, same budget \u2014 a repeatable pipeline wins.",
+          "points": [
+            "Lock the reference",
+            "Write the shot as JSON",
+            "Upscale last"
+          ]
+        }
+      },
+      {
+        "template": "editorial-serif",
+        "transition": {
+          "type": "dip"
+        },
+        "content": {
+          "mode": "quote",
+          "number": "N\u00ba 12",
+          "section": "In conversation",
+          "quote": "The model is not the artist. The *workflow* is.",
+          "attribution": "TechHalla",
+          "role": "AI creator"
+        }
+      },
+      {
+        "template": "split-flap",
+        "transition": {
+          "type": "push"
+        },
+        "content": {
+          "title": "RESULTS",
+          "columns": {
+            "main": "METRIC",
+            "status": "CHANGE"
+          },
+          "rows": [
+            {
+              "text": "RENDER TIME",
+              "status": "-71%"
+            },
+            {
+              "text": "KEYFRAMES",
+              "status": "ZERO"
+            },
+            {
+              "text": "RETENTION",
+              "status": "+38%"
+            }
+          ]
+        }
+      },
+      {
+        "template": "echo-stack",
+        "transition": {
+          "type": "smash"
+        },
+        "content": {
+          "words": [
+            "STEAL IT"
+          ],
+          "message": "STEAL THE WORKFLOW",
+          "sub": "LINK IN BIO"
+        }
+      }
+    ]
+  }
+}

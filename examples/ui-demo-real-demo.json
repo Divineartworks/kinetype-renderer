@@ -1,0 +1,133 @@
+{
+  "template": "ui-demo",
+  "name": "ui-demo-real-demo",
+  "format": "landscape",
+  "fps": 30,
+  "seed": 12,
+  "media": {
+    "own": {
+      "capture": "../fixtures/real/owner/capture.json"
+    },
+    "cust": {
+      "capture": "../fixtures/real/customer/capture.json"
+    }
+  },
+  "content": {
+    "session": {
+      "devices": [
+        {
+          "id": "owner",
+          "capture": "own",
+          "label": "Ola (eier)"
+        },
+        {
+          "id": "customer",
+          "capture": "cust",
+          "label": "Kari (kunde)"
+        }
+      ],
+      "clock": "14:02:28"
+    },
+    "frame": "phone",
+    "retime": "auto",
+    "open": {
+      "at": "owner:notify+0.35",
+      "dur": 2.2
+    },
+    "beats": [
+      {
+        "at": "owner:new-item",
+        "t": 4.6
+      },
+      {
+        "at": "owner:desc",
+        "t": 5.8
+      },
+      {
+        "at": "owner:amount",
+        "t": 7.16
+      },
+      {
+        "at": "owner:send",
+        "t": 8.01
+      },
+      {
+        "at": "customer:approve",
+        "t": 12.08
+      }
+    ],
+    "captions": [
+      {
+        "at": "owner:new-item",
+        "text": "Ekstraarbeid, rett inn i appen",
+        "dur": 2.6
+      },
+      {
+        "at": "owner:send",
+        "text": "Sendt til kunden",
+        "dur": 1.6
+      },
+      {
+        "at": "customer:open",
+        "text": "Kunden godkjenner på mobilen",
+        "dur": 2.4
+      },
+      {
+        "at": "owner:counter",
+        "offset": 0.6,
+        "text": "Godkjent. Skriftlig. Klart til faktura.",
+        "dur": 3.6
+      }
+    ],
+    "minDuration": 20.32,
+    "edit": [
+      {
+        "device": "owner",
+        "from": "owner:new-item-0.8",
+        "to": "owner:sent-ok+0.95"
+      },
+      {
+        "device": "customer",
+        "from": "customer:open",
+        "to": "customer:approve-1.0"
+      },
+      {
+        "split": [
+          "customer",
+          "owner"
+        ],
+        "from": "customer:approve-1.0",
+        "to": "owner:notify+0.45"
+      },
+      {
+        "device": "owner",
+        "from": "owner:notify+0.45",
+        "to": "owner:counted",
+        "focus": {
+          "box": {
+            "x": 48,
+            "y": 930,
+            "w": 984,
+            "h": 720
+          },
+          "at": 0.3
+        }
+      }
+    ]
+  },
+  "params": {
+    "phone": "slab"
+  },
+  "palette": {
+    "bg": "#EEF0EE",
+    "night": "#DCE1DE",
+    "ink": "#0F1A17",
+    "paper": "#FBFCFB",
+    "chrome": "#F3F2EF",
+    "chromeInk": "#5D6067",
+    "accent": "#0E6B58"
+  },
+  "render": {
+    "shutter": 0.5
+  }
+}

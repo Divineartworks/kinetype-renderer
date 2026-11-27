@@ -1,0 +1,312 @@
+{
+ "lines": [
+  {
+   "start": 0.625,
+   "end": 3.465,
+   "words": [
+    {
+     "text": "Hold",
+     "start": 0.625,
+     "end": 0.965
+    },
+    {
+     "text": "the",
+     "start": 0.965,
+     "end": 1.125
+    },
+    {
+     "text": "line",
+     "start": 1.125,
+     "end": 1.645,
+     "emph": true
+    },
+    {
+     "text": "when",
+     "start": 1.705,
+     "end": 1.905
+    },
+    {
+     "text": "the",
+     "start": 1.905,
+     "end": 2.045
+    },
+    {
+     "text": "city",
+     "start": 2.045,
+     "end": 2.405
+    },
+    {
+     "text": "goes",
+     "start": 2.405,
+     "end": 2.685
+    },
+    {
+     "text": "quiet",
+     "start": 2.685,
+     "end": 3.465
+    }
+   ]
+  },
+  {
+   "start": 3.75,
+   "end": 6.23,
+   "words": [
+    {
+     "text": "I",
+     "start": 3.75,
+     "end": 3.89
+    },
+    {
+     "text": "been",
+     "start": 3.89,
+     "end": 4.09
+    },
+    {
+     "text": "running",
+     "start": 4.09,
+     "end": 4.51
+    },
+    {
+     "text": "on",
+     "start": 4.51,
+     "end": 4.65
+    },
+    {
+     "text": "nothing",
+     "start": 4.65,
+     "end": 5.09
+    },
+    {
+     "text": "but",
+     "start": 5.09,
+     "end": 5.27
+    },
+    {
+     "text": "fire",
+     "start": 5.27,
+     "end": 6.23,
+     "emph": true
+    }
+   ]
+  },
+  {
+   "start": 6.875,
+   "end": 9.505,
+   "words": [
+    {
+     "text": "Every",
+     "start": 6.875,
+     "end": 7.215
+    },
+    {
+     "text": "heartbeat",
+     "start": 7.215,
+     "end": 7.835
+    },
+    {
+     "text": "louder",
+     "start": 7.885,
+     "end": 8.285
+    },
+    {
+     "text": "than",
+     "start": 8.285,
+     "end": 8.465
+    },
+    {
+     "text": "the",
+     "start": 8.465,
+     "end": 8.605
+    },
+    {
+     "text": "sirens",
+     "start": 8.605,
+     "end": 9.505,
+     "emph": true
+    }
+   ]
+  },
+  {
+   "start": 10.0,
+   "end": 12.93,
+   "words": [
+    {
+     "text": "Say",
+     "start": 10.0,
+     "end": 10.4
+    },
+    {
+     "text": "my",
+     "start": 10.48,
+     "end": 10.78
+    },
+    {
+     "text": "name",
+     "start": 10.83,
+     "end": 12.93,
+     "emph": true
+    }
+   ]
+  },
+  {
+   "start": 13.125,
+   "end": 15.765,
+   "words": [
+    {
+     "text": "Fast",
+     "start": 13.125,
+     "end": 13.285
+    },
+    {
+     "text": "lane,",
+     "start": 13.285,
+     "end": 13.485
+    },
+    {
+     "text": "no",
+     "start": 13.505,
+     "end": 13.635
+    },
+    {
+     "text": "brakes,",
+     "start": 13.635,
+     "end": 13.855
+    },
+    {
+     "text": "big",
+     "start": 13.875,
+     "end": 14.015
+    },
+    {
+     "text": "stakes,",
+     "start": 14.015,
+     "end": 14.255
+    },
+    {
+     "text": "we",
+     "start": 14.275,
+     "end": 14.395
+    },
+    {
+     "text": "don't",
+     "start": 14.395,
+     "end": 14.545
+    },
+    {
+     "text": "wait",
+     "start": 14.545,
+     "end": 14.745
+    },
+    {
+     "text": "for",
+     "start": 14.745,
+     "end": 14.845
+    },
+    {
+     "text": "the",
+     "start": 14.845,
+     "end": 14.945
+    },
+    {
+     "text": "break",
+     "start": 14.945,
+     "end": 15.165
+    },
+    {
+     "text": "of",
+     "start": 15.165,
+     "end": 15.265
+    },
+    {
+     "text": "day",
+     "start": 15.265,
+     "end": 15.765,
+     "emph": true
+    }
+   ]
+  },
+  {
+   "start": 16.25,
+   "end": 18.22,
+   "words": [
+    {
+     "text": "Gold",
+     "start": 16.25,
+     "end": 16.75,
+     "emph": true
+    },
+    {
+     "text": "in",
+     "start": 16.8,
+     "end": 16.96
+    },
+    {
+     "text": "the",
+     "start": 16.96,
+     "end": 17.12
+    },
+    {
+     "text": "dark",
+     "start": 17.12,
+     "end": 18.22
+    }
+   ]
+  },
+  {
+   "start": 18.75,
+   "end": 21.27,
+   "words": [
+    {
+     "text": "We",
+     "start": 18.75,
+     "end": 18.97
+    },
+    {
+     "text": "don't",
+     "start": 18.97,
+     "end": 19.25
+    },
+    {
+     "text": "fade,",
+     "start": 19.25,
+     "end": 19.75
+    },
+    {
+     "text": "we",
+     "start": 19.87,
+     "end": 20.07
+    },
+    {
+     "text": "ignite",
+     "start": 20.07,
+     "end": 21.27,
+     "emph": true
+    }
+   ]
+  },
+  {
+   "start": 21.875,
+   "end": 24.495,
+   "words": [
+    {
+     "text": "Hold",
+     "start": 21.875,
+     "end": 22.295
+    },
+    {
+     "text": "the",
+     "start": 22.345,
+     "end": 22.545
+    },
+    {
+     "text": "line",
+     "start": 22.595,
+     "end": 24.495,
+     "emph": true
+    }
+   ]
+  }
+ ],
+ "source": "manual",
+ "confidence": 1.0
+}

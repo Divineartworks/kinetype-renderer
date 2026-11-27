@@ -1,0 +1,18 @@
+{
+  "template": "glyph-morph",
+  "format": "vertical",
+  "fps": 60,
+  "bpm": 100,
+  "seed": 9,
+  "content": {
+    "words": [
+      "FEAR",
+      "FOCUS",
+      "FORM",
+      "FLOW"
+    ],
+    "final": "FLY",
+    "label": "KINETYPE — GLYPH MORPH"
+  },
+  "name": "glyph-morph-vertical"
+}

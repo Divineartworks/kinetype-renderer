@@ -1,0 +1,15 @@
+{
+  "schema": "kinetype.flow.v1",
+  "name": "kvikk-customer",
+  "app": { "name": "Kvikk (fixture app, Kunde)", "baseUrl": "http://127.0.0.1:47213", "commit": "fixture" },
+  "device": { "kind": "phone", "viewport": { "width": 360, "height": 672 }, "deviceScaleFactor": 3, "locale": "nb-NO", "timezone": "Europe/Oslo", "colorScheme": "light" },
+  "fps": 60,
+  "seed": 11,
+  "steps": [
+    { "id": "open", "action": "goto", "url": "/?role=customer", "hold": 2.4 },
+    { "id": "read", "action": "wait", "seconds": 1.6, "hold": 0 },
+    { "id": "approve", "action": "click", "target": { "role": "button", "name": "Godta", "exact": true }, "label": "Godta", "hold": 0 },
+    { "id": "approved", "action": "observe", "target": { "selector": "#done-title" }, "label": "Godkjent", "hold": 2.8 },
+    { "id": "peek", "action": "scroll", "by": 220, "duration": 0.9, "hold": 1.6 }
+  ]
+}

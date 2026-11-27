@@ -1,0 +1,26 @@
+{
+  "name": "kinetype",
+  "version": "0.1.0",
+  "description": "Deterministic, template-driven kinetic typography engine. seek(t) compositions rendered frame-exact in headless Chrome, driven by JSON specs from humans or agents.",
+  "type": "module",
+  "bin": {
+    "kinetype": "bin/kinetype.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "mcp": "node src/mcp/server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "ajv": "8.20.0",
+    "esbuild": "0.28.2",
+    "harfbuzzjs": "1.6.2",
+    "opentype.js": "2.0.0",
+    "playwright-core": "1.63.0",
+    "zod": "4.6.7"
+  }
+}

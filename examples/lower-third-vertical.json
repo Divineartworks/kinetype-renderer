@@ -1,0 +1,29 @@
+{
+  "template": "lower-third",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 6,
+  "bpm": 120,
+  "seed": 2,
+  "content": {
+    "name": "Techhalla",
+    "role": "AI creator · stealable workflows",
+    "handle": "@techhalla",
+    "position": "bottom-left",
+    "uppercase": true
+  },
+  "render": {
+    "transparent": false,
+    "formats": [
+      "mp4"
+    ]
+  },
+  "name": "lower-third-vertical",
+  "palette": {
+    "accent": "#B8FF00",
+    "plate": "#0A0A0A"
+  },
+  "params": {
+    "preview": "busy"
+  }
+}

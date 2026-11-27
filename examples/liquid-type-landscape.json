@@ -1,0 +1,16 @@
+{
+  "template": "liquid-type",
+  "format": "landscape",
+  "fps": 60,
+  "bpm": 96,
+  "seed": 6,
+  "content": {
+    "lines": [
+      "EVERYTHING FLOWS",
+      "NOTHING HOLDS"
+    ],
+    "final": "CHAPTER TWO",
+    "label": "EPISODE 07"
+  },
+  "name": "liquid-type-landscape"
+}

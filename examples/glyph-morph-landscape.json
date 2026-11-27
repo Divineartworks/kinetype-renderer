@@ -1,0 +1,17 @@
+{
+  "template": "glyph-morph",
+  "format": "landscape",
+  "fps": 60,
+  "bpm": 92,
+  "seed": 3,
+  "content": {
+    "words": [
+      "CHAOS",
+      "ORDER",
+      "DESIGN"
+    ],
+    "final": "KINETYPE",
+    "label": "CHAPTER 01 — THE SYSTEM"
+  },
+  "name": "glyph-morph-landscape"
+}

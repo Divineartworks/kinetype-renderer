@@ -1,0 +1,16 @@
+{
+  "template": "liquid-type",
+  "format": "vertical",
+  "fps": 60,
+  "bpm": 110,
+  "seed": 12,
+  "content": {
+    "lines": [
+      "FEEL THE DROP",
+      "MOVE LIKE WATER"
+    ],
+    "final": "FLOW STATE",
+    "label": "SIGNAL / 12"
+  },
+  "name": "liquid-type-vertical"
+}

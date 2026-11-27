@@ -1,0 +1,53 @@
+{
+  "template": "ui-demo",
+  "name": "ui-demo",
+  "format": "landscape",
+  "fps": 30,
+  "seed": 4,
+  "media": {
+    "cap": {
+      "capture": "../fixtures/captures/demo-app-desktop/capture.json"
+    }
+  },
+  "content": {
+    "capture": "cap",
+    "frame": "browser",
+    "urlLabel": "app.fieldnote.dev",
+    "range": {
+      "from": "open",
+      "to": "done"
+    },
+    "retime": [
+      {
+        "at": "open",
+        "hold": 0.7
+      },
+      {
+        "from": "client",
+        "to": "priority",
+        "speed": 1.8
+      },
+      {
+        "at": "created",
+        "hold": 0.4
+      }
+    ],
+    "callouts": [
+      {
+        "at": "new-project",
+        "text": "Start a project in one click"
+      },
+      {
+        "at": "priority",
+        "text": "Flag what matters"
+      },
+      {
+        "at": "invite",
+        "text": "Bring the crew in"
+      }
+    ]
+  },
+  "render": {
+    "shutter": 0.5
+  }
+}

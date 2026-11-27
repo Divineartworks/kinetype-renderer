@@ -1,0 +1,8 @@
+{
+  "schema": "kinetype.session.v1",
+  "name": "device-demo-session",
+  "devices": [
+    { "id": "phone", "flow": "demo.flow.json" },
+    { "id": "office", "flow": "office.flow.json" }
+  ]
+}

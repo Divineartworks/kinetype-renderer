@@ -1,0 +1,3 @@
+{ "template": "type-window", "name": "type-window-knockout", "format": "landscape", "bpm": 100, "seed": 9,
+  "media": { "clip": { "src": "../fixtures/footage-abstract.mp4", "loop": true } },
+  "content": { "words": ["SIGNAL", "NOISE", "SIGNAL"], "sub": "KINETYPE — KNOCKOUT", "mode": "knockout" } }

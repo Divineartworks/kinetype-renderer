@@ -1,0 +1,22 @@
+{
+  "template": "swiss-grid",
+  "format": "landscape",
+  "fps": 60,
+  "duration": 9.6,
+  "bpm": 100,
+  "seed": 3,
+  "content": {
+    "number": "03",
+    "kicker": "CHAPTER THREE",
+    "title": "Why workflows beat prompts",
+    "subtitle": "The same model, the same budget — a repeatable pipeline wins every time.",
+    "points": [
+      "Lock the reference frame first",
+      "Write the shot as JSON",
+      "Zero keyframes, one pass",
+      "Upscale last, never first"
+    ],
+    "footer": "AI VIDEO FIELD GUIDE — EP. 12"
+  },
+  "name": "swiss-grid"
+}

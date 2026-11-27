@@ -1,0 +1,20 @@
+{
+  "schema": "kinetype.flow.v1",
+  "name": "device-calibration",
+  "app": { "name": "Calibration fixture", "baseUrl": "http://10.0.2.2:8787" },
+  "device": { "kind": "android", "target": { "browser": "chrome", "transport": "adb" } },
+  "tempo": { "preset": "demo-artist" },
+  "seed": 7,
+  "calibrate": "fixture",
+  "steps": [
+    { "id": "open", "action": "goto", "url": "/calibration", "hold": 0.3 },
+    { "id": "cal-tl", "action": "observe", "target": { "selector": "[data-cal=tl]" }, "label": "tl" },
+    { "id": "cal-br", "action": "observe", "target": { "selector": "[data-cal=br]" }, "label": "br" },
+    { "id": "cal-doc", "action": "observe", "target": { "selector": "[data-cal=doc]" }, "label": "doc", "optional": true },
+    { "id": "tap-1", "action": "tap", "target": { "selector": "[data-cal=doc]" }, "hold": 0.5 },
+    { "id": "fling-down", "action": "fling", "direction": "up", "distance": 300, "hold": 0.4 },
+    { "id": "cal-doc-2", "action": "observe", "target": { "selector": "[data-cal=doc]" }, "label": "doc after fling", "optional": true },
+    { "id": "swipe-back", "action": "swipe", "direction": "down", "distance": 400, "hold": 0.5 },
+    { "id": "tap-2", "action": "tap", "target": { "selector": "[data-cal=tl]" }, "hold": 0.6 }
+  ]
+}

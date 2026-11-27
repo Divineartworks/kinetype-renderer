@@ -1,0 +1,26 @@
+{
+  "template": "brand-card",
+  "name": "brand-card-hook-vertical",
+  "format": "vertical",
+  "fps": 30,
+  "seed": 3,
+  "content": {
+    "mode": "hook",
+    "kicker": "FIELDNOTE",
+    "headline": "Every job, one calm place",
+    "logo": "logo"
+  },
+  "palette": {
+    "night": "#0E1A33",
+    "primary": "#E8692A",
+    "accent": "#F3B13C"
+  },
+  "params": {
+    "ground": "night"
+  },
+  "media": {
+    "logo": {
+      "src": "../fixtures/brand/fieldnote-logo-light.svg"
+    }
+  }
+}

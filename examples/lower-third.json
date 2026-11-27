@@ -1,0 +1,22 @@
+{
+  "template": "lower-third",
+  "format": "landscape",
+  "fps": 60,
+  "duration": 6,
+  "bpm": 120,
+  "seed": 2,
+  "content": {
+    "name": "Sam Lund",
+    "role": "Director, Studio North",
+    "handle": "@samlund",
+    "position": "bottom-left"
+  },
+  "render": {
+    "transparent": true,
+    "formats": [
+      "mov-alpha",
+      "webm"
+    ]
+  },
+  "name": "lower-third"
+}

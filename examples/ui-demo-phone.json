@@ -1,0 +1,43 @@
+{
+  "template": "ui-demo",
+  "name": "ui-demo-phone",
+  "format": "vertical",
+  "fps": 30,
+  "seed": 7,
+  "media": {
+    "cap": {
+      "capture": "../fixtures/captures/demo-app-phone/capture.json"
+    }
+  },
+  "content": {
+    "capture": "cap",
+    "frame": "phone",
+    "range": {
+      "from": "open",
+      "to": "done"
+    },
+    "retime": [
+      {
+        "at": "open",
+        "hold": 0.7
+      },
+      {
+        "at": "created",
+        "hold": 0.5
+      }
+    ],
+    "callouts": [
+      {
+        "at": "new-project",
+        "text": "New project, one tap"
+      },
+      {
+        "at": "create",
+        "text": "One tap to save"
+      }
+    ]
+  },
+  "render": {
+    "shutter": 0.5
+  }
+}

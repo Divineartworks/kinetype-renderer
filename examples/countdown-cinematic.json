@@ -1,0 +1,19 @@
+{
+  "template": "countdown",
+  "name": "countdown-cinematic",
+  "format": "landscape",
+  "seed": 8,
+  "bpm": 96,
+  "content": {
+    "kicker": "THE FILM LIST",
+    "title": "Five shots that changed cinema",
+    "items": [
+      { "title": "The long take", "detail": "Touch of Evil, 1958 — three minutes, no cut" },
+      { "title": "The dolly zoom", "detail": "Vertigo, 1958 — the floor falls away" },
+      { "title": "The match cut", "detail": "2001, 1968 — a bone becomes a satellite" },
+      { "title": "Bullet time", "detail": "The Matrix, 1999 — time stops, the camera doesn't" },
+      { "title": "The split diopter", "detail": "Two planes in focus at once" }
+    ]
+  },
+  "params": { "style": "cinematic", "beatsPerItem": 6 }
+}

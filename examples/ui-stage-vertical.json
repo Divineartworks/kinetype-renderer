@@ -1,0 +1,24 @@
+{
+  "template": "ui-stage",
+  "name": "ui-stage-vertical",
+  "format": "vertical",
+  "fps": 30,
+  "media": {
+    "phone": { "capture": "../fixtures/captures/demo-app-phone/capture.json" },
+    "desk": { "capture": "../fixtures/captures/demo-app-desktop/capture.json" }
+  },
+  "params": { "bandBottom": 0.2 },
+  "content": {
+    "panels": [
+      { "id": "field", "capture": "phone", "frame": "phone", "label": "Ana · on site", "range": { "from": "open", "to": "created" } },
+      { "id": "office", "capture": "desk", "frame": "browser", "urlLabel": "app.fieldnote.dev", "label": "Sam · office", "start": 0.6, "crop": { "x": 300, "y": 40, "w": 860, "h": 600 }, "range": { "from": "open", "to": "created" } }
+    ],
+    "layout": [
+      { "at": 0, "arrangement": "stack2", "focus": "field" },
+      { "at": "office:priority", "arrangement": "stack2", "focus": "office" }
+    ],
+    "clock": { "keys": [{ "at": 0, "time": "09:41" }, { "at": "office:priority", "time": "09:42", "roll": true }] },
+    "connectors": [{ "from": { "panel": "field", "target": "name" }, "to": { "panel": "office", "target": "name" }, "at": 2.5, "dur": 0.8, "hold": 0.8, "label": "Same project" }],
+    "footnote": "Demo data"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "template": "brand-card",
+  "name": "brand-card-cta-night-vertical",
+  "format": "vertical",
+  "fps": 30,
+  "seed": 5,
+  "palette": {
+    "night": "#0E1A33",
+    "primary": "#E8692A",
+    "accent": "#F3B13C"
+  },
+  "params": {
+    "ground": "night"
+  },
+  "media": {
+    "logo": {
+      "src": "../fixtures/brand/fieldnote-logo.svg"
+    },
+    "logoLight": {
+      "src": "../fixtures/brand/fieldnote-logo-light.svg"
+    },
+    "cap": {
+      "capture": "../fixtures/captures/demo-app-phone/capture.json"
+    }
+  },
+  "content": {
+    "mode": "cta",
+    "logo": "logo",
+    "logoNight": "logoLight",
+    "headline": "Run your next job on Fieldnote",
+    "cta": "Start free",
+    "url": "fieldnote.dev",
+    "product": {
+      "capture": "cap",
+      "at": "done"
+    }
+  }
+}

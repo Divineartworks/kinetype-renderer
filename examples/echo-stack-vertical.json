@@ -1,0 +1,26 @@
+{
+  "template": "echo-stack",
+  "name": "echo-stack-vertical",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 12,
+  "loop": true,
+  "bpm": 120,
+  "seed": 11,
+  "content": {
+    "words": [
+      "DROP",
+      "04"
+    ],
+    "message": "DROP 04 IS LIVE NOW",
+    "sub": "LINK IN BIO"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 19
+    },
+    "loopExact": true
+  }
+}
