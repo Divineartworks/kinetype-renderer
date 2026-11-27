@@ -1,0 +1,12 @@
+{
+  "template": "brand-card",
+  "name": "brand-card-hook",
+  "format": "landscape",
+  "fps": 30,
+  "seed": 3,
+  "content": {
+    "mode": "hook",
+    "kicker": "FIELDNOTE",
+    "headline": "Every job, one calm place"
+  }
+}

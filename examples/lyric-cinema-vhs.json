@@ -1,0 +1,16 @@
+{
+  "template": "lyric-cinema",
+  "name": "lyric-cinema-vhs",
+  "format": "landscape",
+  "fps": 60,
+  "bpm": 96,
+  "seed": 5,
+  "content": {
+    "lyricsSrc": "lyrics/demo-verse.json",
+    "title": "Hold The Line",
+    "artist": "Demo Artist"
+  },
+  "params": {
+    "style": "vhs"
+  }
+}

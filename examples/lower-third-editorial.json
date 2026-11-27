@@ -1,0 +1,12 @@
+{
+  "template": "lower-third",
+  "name": "lower-third-editorial",
+  "format": "landscape",
+  "fps": 60,
+  "duration": 6,
+  "bpm": 120,
+  "seed": 5,
+  "content": { "name": "Mara Ellison", "role": "Cinematographer", "handle": "@mara.frames", "position": "bottom-left" },
+  "params": { "style": "editorial", "preview": "busy" },
+  "render": { "transparent": false, "formats": ["mp4"] }
+}

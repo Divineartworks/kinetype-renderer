@@ -1,0 +1,26 @@
+{
+  "template": "type-window",
+  "name": "type-window-prism",
+  "format": "vertical",
+  "bpm": 100,
+  "seed": 4,
+  "media": {
+    "clip": {
+      "src": "../fixtures/footage-abstract.mp4",
+      "loop": true
+    }
+  },
+  "content": {
+    "words": [
+      "LOOK",
+      "CLOSER",
+      "IT WAS ALWAYS",
+      "HERE"
+    ],
+    "sub": "KINETYPE \u2014 TYPE WINDOW",
+    "mode": "window"
+  },
+  "params": {
+    "style": "prism"
+  }
+}

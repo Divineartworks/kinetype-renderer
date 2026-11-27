@@ -1,0 +1,32 @@
+{
+  "template": "extrude-3d",
+  "name": "extrude-3d-landscape",
+  "format": "landscape",
+  "fps": 60,
+  "duration": 12,
+  "bpm": 120,
+  "seed": 3,
+  "content": {
+    "cards": [
+      "CHAPTER",
+      "ONE",
+      "THE BIG",
+      "IDEA"
+    ],
+    "sub": "A FILM BY STUDIO NORTH"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 20
+    }
+  },
+  "palette": {
+    "bg": "#F2E9DA",
+    "face": "#FFFFFF",
+    "side": "#1F3BFF",
+    "side2": "#FF3B2F",
+    "ink": "#141414"
+  }
+}

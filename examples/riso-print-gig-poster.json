@@ -1,0 +1,23 @@
+{
+  "template": "riso-print",
+  "name": "riso-print-gig-poster",
+  "format": "portrait",
+  "fps": 60,
+  "duration": 10,
+  "bpm": 96,
+  "seed": 3,
+  "content": {
+    "headline": "LIVE AT THE DEPOT",
+    "hero": "LOUD",
+    "subhead": "THREE BANDS \u00b7 ONE NIGHT \u00b7 DOORS 20:00",
+    "labels": [
+      "SAT 14 NOV",
+      "\u00a312 ADV",
+      "THE DEPOT"
+    ],
+    "issue": "03"
+  },
+  "params": {
+    "style": "gig-poster"
+  }
+}

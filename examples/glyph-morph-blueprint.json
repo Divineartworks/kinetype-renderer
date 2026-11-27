@@ -1,0 +1,21 @@
+{
+  "template": "glyph-morph",
+  "format": "square",
+  "fps": 60,
+  "bpm": 100,
+  "seed": 5,
+  "content": {
+    "words": [
+      "NOISE",
+      "SIGNAL",
+      "SHAPE",
+      "STORY"
+    ],
+    "final": "YOURS",
+    "label": "KINETYPE \u2014 GLYPH MORPH"
+  },
+  "name": "glyph-morph-blueprint",
+  "params": {
+    "style": "blueprint"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "template": "editorial-serif",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 11,
+  "bpm": 72,
+  "seed": 5,
+  "content": {
+    "mode": "quote",
+    "number": "12",
+    "section": "In Conversation",
+    "quote": "The model is not the artist. The *workflow* is \u2014 and a workflow is just taste, written down so a machine can repeat it.",
+    "attribution": "Techhalla",
+    "role": "AI creator, on stealable workflows"
+  },
+  "name": "editorial-serif-noir-quote-vertical",
+  "params": {
+    "style": "noir"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "template": "brand-card",
+  "name": "brand-card-cta",
+  "format": "landscape",
+  "fps": 30,
+  "seed": 3,
+  "media": {
+    "logo": {
+      "src": "../fixtures/brand/fieldnote-logo.svg"
+    },
+    "cap": {
+      "capture": "../fixtures/captures/demo-app-desktop/capture.json"
+    }
+  },
+  "content": {
+    "mode": "cta",
+    "logo": "logo",
+    "headline": "Run your next job on Fieldnote",
+    "cta": "Start free",
+    "url": "fieldnote.dev",
+    "product": {
+      "capture": "cap",
+      "at": "done",
+      "urlLabel": "app.fieldnote.dev"
+    }
+  }
+}

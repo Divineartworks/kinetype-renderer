@@ -1,0 +1,29 @@
+{
+  "template": "type-tunnel",
+  "name": "type-tunnel-vertical",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 14,
+  "bpm": 120,
+  "seed": 5,
+  "content": {
+    "words": [
+      "FOCUS",
+      "GRIND",
+      "REPEAT",
+      "NO SHORTCUTS"
+    ],
+    "finale": "LEGEND",
+    "sub": "EPISODE 07"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 22
+    }
+  },
+  "params": {
+    "accentEvery": 3
+  }
+}

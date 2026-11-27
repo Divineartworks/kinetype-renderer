@@ -1,0 +1,33 @@
+{
+  "template": "marquee-bands",
+  "name": "marquee-bands",
+  "format": "square",
+  "fps": 60,
+  "duration": 16,
+  "loop": true,
+  "bpm": 120,
+  "seed": 5,
+  "content": {
+    "bands": [
+      {
+        "text": "NEW DROP"
+      },
+      {
+        "text": "LIMITED RUN"
+      },
+      {
+        "text": "NO RESTOCK"
+      }
+    ],
+    "title": "DROP 04",
+    "subtitle": "FRI 18:00 CET · ONLINE ONLY"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 28
+    },
+    "loopExact": true
+  }
+}

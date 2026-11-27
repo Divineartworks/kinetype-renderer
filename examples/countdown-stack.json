@@ -1,0 +1,19 @@
+{
+  "template": "countdown",
+  "name": "countdown-stack",
+  "format": "vertical",
+  "seed": 12,
+  "bpm": 128,
+  "content": {
+    "kicker": "WEEKLY CHART",
+    "title": "Top 5 AI video tools",
+    "items": [
+      { "title": "Seedance", "detail": "motion that follows the prompt" },
+      { "title": "Magnific", "detail": "the upscale that sells it" },
+      { "title": "Kling", "detail": "long shots, stable faces" },
+      { "title": "Runway", "detail": "the editor in the loop" },
+      { "title": "Luma", "detail": "fast drafts, good camera" }
+    ]
+  },
+  "params": { "style": "stack", "beatsPerItem": 6 }
+}

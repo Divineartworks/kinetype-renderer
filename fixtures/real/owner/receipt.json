@@ -1,0 +1,66 @@
+{
+ "schema": "kinetype.capture.receipt.v2",
+ "tool": {
+  "name": "scripts/real-fixture.js",
+  "version": "1"
+ },
+ "source": {
+  "captureSha256": "dd439afb6e5422897aa3591223b94e0a47c25ce72c6523bcb7b1f8de6b882b48",
+  "mp4Sha256": "7fa557199a58b7c0ee5e1def9e2493ec1c73dab50af7aa1aa5177c4b616b10d5",
+  "flow": "kvikk-owner"
+ },
+ "captureSha256": "ac9f01cf520d3df7184f9993c74662455cb7abfc4fc61bc17cf003cc40a7dce0",
+ "mp4Sha256": "79659824fd407b244533966eac42250cd70f326a5c992cbcbaa00832a9d72715",
+ "mp4": {
+  "codec": "h264",
+  "pixFmt": "yuv420p",
+  "width": 1080,
+  "height": 2400,
+  "frames": 1562,
+  "fps": 60,
+  "crf": 18,
+  "bytes": 2975743
+ },
+ "versions": {
+  "node": "v22.23.3",
+  "playwrightCore": "1.63.0",
+  "chrome": "149.0.7827.55",
+  "ffmpeg": "ffmpeg version n8.0.1-48-g0592be14ff-20260116 Copyright (c) 2000-2025 the FFmpeg developers"
+ },
+ "params": {
+  "sessionOffset": 0,
+  "clockSecs": 41,
+  "payoff": [
+   "notify",
+   "counter"
+  ],
+  "notify": "notify",
+  "counter": "counter",
+  "busy": "busy-from:busy-to"
+ },
+ "analysis": {
+  "idle": {
+   "thresholdPxDelta": 12,
+   "thresholdFraction": 0.0002,
+   "minSeconds": 0.3,
+   "ranges": 11,
+   "source": "frame-diff of the page region (status-bar clock excluded by construction)"
+  },
+  "busy": {
+   "source": "declared:busy-from:busy-to"
+  },
+  "keys": [
+   {
+    "step": "desc",
+    "source": "framediff",
+    "chars": 26
+   },
+   {
+    "step": "amount",
+    "source": "framediff",
+    "chars": 5
+   }
+  ]
+ },
+ "marksPatched": "EDIT lane added payoff marks (owner sent-ok @14.6 success / customer approved @4.05 success) after generation; capture.json sha updated"
+}

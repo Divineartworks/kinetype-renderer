@@ -1,0 +1,88 @@
+{
+  "template": "ui-stage",
+  "name": "ui-stage",
+  "format": "landscape",
+  "fps": 30,
+  "media": {
+    "phone": {
+      "capture": "../fixtures/captures/demo-app-phone/capture.json"
+    },
+    "desk": {
+      "capture": "../fixtures/captures/demo-app-desktop/capture.json"
+    }
+  },
+  "content": {
+    "panels": [
+      {
+        "id": "field",
+        "capture": "phone",
+        "frame": "phone",
+        "label": "Ana · on site",
+        "range": {
+          "from": "open",
+          "to": "created"
+        }
+      },
+      {
+        "id": "office",
+        "capture": "desk",
+        "frame": "browser",
+        "urlLabel": "app.fieldnote.dev",
+        "label": "Sam · office",
+        "start": 0.6,
+        "range": {
+          "from": "open",
+          "to": "done"
+        },
+        "callouts": [
+          {
+            "at": "invite",
+            "text": "Invite the crew"
+          }
+        ]
+      }
+    ],
+    "layout": [
+      {
+        "at": 0,
+        "arrangement": "dual",
+        "focus": "field"
+      },
+      {
+        "at": "office:priority",
+        "arrangement": "dual",
+        "focus": "office"
+      }
+    ],
+    "clock": {
+      "keys": [
+        {
+          "at": 0,
+          "time": "09:41"
+        },
+        {
+          "at": "office:priority",
+          "time": "09:42",
+          "roll": true
+        }
+      ]
+    },
+    "connectors": [
+      {
+        "from": {
+          "panel": "field",
+          "target": "name"
+        },
+        "to": {
+          "panel": "office",
+          "target": "name"
+        },
+        "at": 2.5,
+        "dur": 0.8,
+        "hold": 0.8,
+        "label": "Same project"
+      }
+    ],
+    "footnote": "Demo data"
+  }
+}

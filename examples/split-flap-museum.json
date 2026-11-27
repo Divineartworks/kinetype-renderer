@@ -1,0 +1,17 @@
+{
+  "template": "split-flap",
+  "name": "split-flap-museum",
+  "format": "square",
+  "seed": 4,
+  "bpm": 90,
+  "content": {
+    "title": "NOW SHOWING",
+    "rows": [
+      { "text": "GALLERY 1 LIGHT" },
+      { "text": "GALLERY 2 FORM", "color": "a" },
+      { "text": "GALLERY 3 TIME" },
+      { "text": "OPEN UNTIL 20:00", "color": "b" }
+    ]
+  },
+  "params": { "style": "museum" }
+}

@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "kinetype.flow.v1",
+  "title": "kinetype flow file (input of `kinetype capture`)",
+  "type": "object",
+  "required": ["schema", "name", "device", "steps"],
+  "additionalProperties": false,
+  "properties": {
+    "schema": { "const": "kinetype.flow.v1" },
+    "name": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "maxLength": 80 },
+    "app": {
+      "type": "object", "required": ["name", "baseUrl"], "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "baseUrl": { "type": "string", "pattern": "^https?://" },
+        "commit": { "type": "string" }
+      }
+    },
+    "device": {
+      "type": "object", "required": ["kind"], "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["desktop", "phone", "android"] },
+        "target": {
+          "type": "object", "additionalProperties": false, "description": "android (C1 v2): which device, browser and transport.",
+          "properties": { "serial": { "type": "string" }, "browser": { "enum": ["chrome", "pwa"] }, "transport": { "enum": ["adb", "cdp-touch", "cdp-desktop"] }, "textInput": { "enum": ["cdp", "scrcpy"] } }
+        },
+        "screen": {
+          "type": "object", "additionalProperties": false, "description": "cdp-touch stand-in phone screen in video px.",
+          "properties": { "width": { "type": "integer", "minimum": 200 }, "height": { "type": "integer", "minimum": 200 }, "dpr": { "type": "number", "minimum": 1, "maximum": 4 }, "statusBar": { "type": "integer", "minimum": 0 }, "navBar": { "type": "integer", "minimum": 0 } }
+        },
+        "viewport": {
+          "type": "object", "required": ["width", "height"], "additionalProperties": false,
+          "properties": { "width": { "type": "integer", "minimum": 200, "maximum": 3840 }, "height": { "type": "integer", "minimum": 200, "maximum": 3840 } }
+        },
+        "deviceScaleFactor": { "type": "number", "minimum": 1, "maximum": 4 },
+        "locale": { "type": "string" },
+        "timezone": { "type": "string" },
+        "colorScheme": { "enum": ["light", "dark"] }
+      }
+    },
+    "fps": { "type": "integer", "minimum": 10, "maximum": 60 },
+    "seed": { "type": "integer" },
+    "trackTail": { "type": "number", "minimum": 3, "maximum": 30, "description": "Seconds a targeted event's box/visibility track keeps recording after its step ends (default 3)." },
+    "title": { "type": "string", "description": "documentation only" },
+    "status": { "type": "string", "description": "documentation only" },
+    "description": { "type": "string", "description": "documentation only" },
+    "marks": { "type": "array", "items": { "type": "string" }, "description": "documentation only: the flow's mark ids (each must also be a mark step)" },
+    "tempo": { "$ref": "#/definitions/tempo" },
+    "stage": {
+      "description": "android: CLEAN STAGE preflight (src/device/stage.js); false disables it",
+      "oneOf": [{ "const": false }, { "type": "object", "additionalProperties": false, "properties": { "locale": { "type": ["string", "boolean"] }, "demo": { "type": "boolean" }, "clock": { "type": "string", "pattern": "^[0-2][0-9][0-5][0-9]$" }, "translate": { "enum": ["off", "leave"] }, "closeTabs": { "type": "boolean" }, "overlay": { "type": "boolean" }, "pwaName": { "type": "string", "minLength": 1 } } }]
+    },
+    "calibrate": { "enum": ["overlay", "fixture", "off"], "description": "android: how rehearsal checks the CSS→video mapping (overlay = transient injected markers, fixture = the page's own fixed data-cal markers)." },
+    "setup": { "type": "array", "items": { "$ref": "#/definitions/request" } },
+    "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/step" } }
+  },
+  "definitions": {
+    "tempo": { "type": "object", "properties": { "preset": { "enum": ["demo-artist", "brisk"] } }, "description": "Tempo preset + overrides of its keys (src/device/choreo.js)." },
+    "point": { "type": "object", "required": ["x", "y"], "additionalProperties": false, "properties": { "x": { "type": "number" }, "y": { "type": "number" } } },
+    "target": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {
+        "selector": { "type": "string", "minLength": 1 },
+        "testId": { "type": "string", "minLength": 1 },
+        "testid": { "type": "string", "minLength": 1, "description": "alias of testId" },
+        "os": {
+          "type": "object", "additionalProperties": false, "minProperties": 1, "description": "android: a NATIVE UI element (another app, the share sheet, a notification), resolved from the accessibility tree (uiautomator)",
+          "properties": { "package": { "type": "string" }, "text": { "type": "string" }, "resourceId": { "type": "string" }, "desc": { "type": "string" }, "exact": { "type": "boolean" }, "nth": { "type": "integer", "minimum": 0 } }
+        },
+        "role": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
+        "text": { "type": "string", "minLength": 1 },
+        "exact": { "type": "boolean" },
+        "nth": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "request": {
+      "type": "object", "required": ["action", "method", "url"], "additionalProperties": false,
+      "properties": {
+        "action": { "const": "request" },
+        "method": { "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"] },
+        "url": { "type": "string", "minLength": 1 },
+        "body": {},
+        "headers": { "type": "object", "additionalProperties": { "type": "string" } }
+      }
+    },
+    "step": {
+      "type": "object", "required": ["id", "action"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "maxLength": 80 },
+        "action": { "enum": ["goto", "click", "type", "fill", "press", "hover", "scroll", "wait", "waitFor", "mark", "observe", "tap", "swipe", "fling", "back", "keyboard", "sync", "refresh"] },
+        "hold": { "type": "number", "minimum": 0, "maximum": 30 },
+        "label": { "type": "string" },
+        "target": { "$ref": "#/definitions/target" },
+        "url": { "type": "string" },
+        "value": { "type": "string" },
+        "key": { "type": "string" },
+        "cps": { "type": "number", "minimum": 2, "maximum": 40 },
+        "seconds": { "type": "number", "minimum": 0, "maximum": 60 },
+        "by": { "type": "number" },
+        "duration": { "type": "number", "minimum": 0.1, "maximum": 5 },
+        "network": { "type": "boolean" },
+        "timeout": { "type": "number", "minimum": 0.1, "maximum": 60 },
+        "secret": { "type": "boolean" },
+        "optional": { "type": "boolean" },
+        "from": { "$ref": "#/definitions/point" },
+        "to": { "$ref": "#/definitions/point" },
+        "direction": { "enum": ["up", "down"], "description": "swipe/fling: finger direction (up = content moves up)." },
+        "distance": { "type": "number", "minimum": 10, "maximum": 5000, "description": "swipe/fling finger travel, CSS px (default 45 % of the viewport)." },
+        "velocity": { "type": "number", "minimum": 200, "maximum": 20000, "description": "fling release velocity, video px/s." },
+        "device": { "type": "string", "description": "sync: the other device's id in the session." },
+        "mark": { "type": "string", "description": "sync: the mark id to wait for." },
+        "via": { "enum": ["tap", "hashchange", "reload", "wait"], "description": "refresh: how the app is made to refresh on screen." },
+        "until": { "$ref": "#/definitions/target" },
+        "show": { "type": "boolean" },
+        "tempo": { "$ref": "#/definitions/tempo" },
+        "note": { "type": "string", "description": "documentation only" },
+        "files": { "type": "array", "minItems": 1, "maxItems": 10, "items": { "type": "string", "minLength": 1 } }
+      },
+      "allOf": [
+        { "if": { "properties": { "action": { "const": "goto" } } }, "then": { "required": ["url"] } },
+        { "if": { "properties": { "action": { "enum": ["click", "tap", "hover", "observe"] } } }, "then": { "required": ["target"] } },
+        { "if": { "properties": { "action": { "enum": ["type", "fill"] } } }, "then": { "required": ["target", "value"] } },
+        { "if": { "properties": { "action": { "const": "press" } } }, "then": { "required": ["key"] } },
+        { "if": { "required": ["files"] }, "then": { "properties": { "action": { "const": "click" } } } },
+        { "if": { "properties": { "action": { "const": "wait" } } }, "then": { "required": ["seconds"] } },
+        { "if": { "properties": { "action": { "const": "scroll" } } }, "then": { "anyOf": [{ "required": ["target"] }, { "required": ["by"] }] } },
+        { "if": { "properties": { "action": { "const": "waitFor" } } }, "then": { "anyOf": [{ "required": ["target"] }, { "required": ["network"] }] } },
+        { "if": { "properties": { "action": { "const": "sync" } } }, "then": { "required": ["device", "mark"] } },
+        { "if": { "properties": { "action": { "const": "keyboard" } } }, "then": { "required": ["show"] } },
+        { "if": { "properties": { "action": { "enum": ["swipe", "fling"] } } }, "then": { "anyOf": [{ "required": ["from", "to"] }, { "required": ["direction"] }, { "required": ["target"] }] } }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

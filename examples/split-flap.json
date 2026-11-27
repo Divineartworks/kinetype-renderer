@@ -1,0 +1,47 @@
+{
+  "template": "split-flap",
+  "format": "landscape",
+  "fps": 60,
+  "bpm": 120,
+  "seed": 11,
+  "content": {
+    "title": "DEPARTURES",
+    "columns": {
+      "main": "DESTINATION",
+      "status": "STATUS"
+    },
+    "rows": [
+      {
+        "text": "09:40 BERLIN",
+        "status": "ON TIME"
+      },
+      {
+        "text": "09:55 LISBON",
+        "status": "BOARDING",
+        "statusColor": "a"
+      },
+      {
+        "text": "10:05 TOKYO",
+        "status": "DELAYED",
+        "statusColor": "b",
+        "then": {
+          "status": "CANCELLED",
+          "statusColor": "b"
+        }
+      },
+      {
+        "text": "10:20 NEW YORK",
+        "status": "ON TIME",
+        "then": {
+          "status": "GATE 12",
+          "statusColor": "a"
+        }
+      },
+      {
+        "text": "10:35 SAO PAULO",
+        "status": "ON TIME"
+      }
+    ]
+  },
+  "name": "split-flap"
+}

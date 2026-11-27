@@ -1,0 +1,28 @@
+{
+  "template": "echo-stack",
+  "name": "echo-stack-outline-drift",
+  "format": "square",
+  "fps": 60,
+  "duration": 12,
+  "loop": true,
+  "bpm": 120,
+  "seed": 11,
+  "content": {
+    "words": [
+      "QUIET"
+    ],
+    "message": "QUIET LUXURY",
+    "sub": "THE AUTUMN EDIT"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 19
+    },
+    "loopExact": true
+  },
+  "params": {
+    "style": "outline-drift"
+  }
+}

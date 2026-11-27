@@ -1,0 +1,99 @@
+{
+  "template": "kinetic-captions",
+  "name": "kinetic-captions-neon",
+  "format": "vertical",
+  "fps": 30,
+  "duration": 9,
+  "media": {
+    "ep": {
+      "src": "../fixtures/footage-abstract.mp4"
+    }
+  },
+  "content": {
+    "words": [
+      {
+        "text": "why",
+        "start": 0.22,
+        "end": 0.4
+      },
+      {
+        "text": "do",
+        "start": 0.42,
+        "end": 0.5
+      },
+      {
+        "text": "you",
+        "start": 0.52,
+        "end": 0.7
+      },
+      {
+        "text": "chase",
+        "start": 1,
+        "end": 1.5
+      },
+      {
+        "text": "when",
+        "start": 2,
+        "end": 2.2
+      },
+      {
+        "text": "you",
+        "start": 2.2,
+        "end": 2.35
+      },
+      {
+        "text": "know",
+        "start": 2.35,
+        "end": 2.6
+      },
+      {
+        "text": "it",
+        "start": 2.6,
+        "end": 2.7
+      },
+      {
+        "text": "will",
+        "start": 2.7,
+        "end": 2.85
+      },
+      {
+        "text": "devastate",
+        "start": 2.9,
+        "end": 3.6
+      },
+      {
+        "text": "you",
+        "start": 3.6,
+        "end": 3.8
+      },
+      {
+        "text": "rejection",
+        "start": 4.6,
+        "end": 5.2
+      },
+      {
+        "text": "breeds",
+        "start": 5.25,
+        "end": 5.6
+      },
+      {
+        "text": "obsession",
+        "start": 5.7,
+        "end": 6.5
+      },
+      {
+        "text": "protect",
+        "start": 7.2,
+        "end": 7.6
+      },
+      {
+        "text": "yourself",
+        "start": 7.65,
+        "end": 8.3
+      }
+    ]
+  },
+  "params": {
+    "look": "neon"
+  }
+}

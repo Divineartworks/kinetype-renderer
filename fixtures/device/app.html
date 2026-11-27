@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b6e6e">
+<title>Verkstedlogg</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+:root {
+  --accent: #0b6e6e; --accent-dark: #085858; --accent-soft: #e0f0ef;
+  --bg: #f4f5f7; --card: #ffffff; --ink: #14181f; --muted: #5b6573; --line: #e3e6ea;
+  --warn: #9a4a00; --warn-soft: #fdeed8; --plan: #3f4b5c; --plan-soft: #e8ebf0;
+  --shadow: 0 1px 2px rgba(20,24,31,.06), 0 4px 14px rgba(20,24,31,.06);
+  --sat: env(safe-area-inset-top, 0px); --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px); --sar: env(safe-area-inset-right, 0px);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font-size: 16.5px; line-height: 1.4; min-height: 100vh;
+  padding-left: var(--sal); padding-right: var(--sar); }
+button, input { font: inherit; color: inherit; }
+.screen[hidden] { display: none; }
+
+/* header */
+.top { position: sticky; top: 0; z-index: 5; background: var(--bg); padding: calc(var(--sat) + 18px) 16px 10px; }
+.top.plain { padding-bottom: 6px; }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+h1 { margin: 0; font-size: 28px; line-height: 1.15; letter-spacing: -.02em; font-weight: 750; }
+.chip { font-size: 14px; font-weight: 600; color: var(--accent-dark); background: var(--accent-soft); padding: 6px 12px; border-radius: 999px; white-space: nowrap; }
+.search { position: relative; margin-top: 14px; }
+.search svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; color: var(--muted); pointer-events: none; }
+.search input { width: 100%; height: 48px; border: 1px solid var(--line); border-radius: 14px; background: var(--card); padding: 0 14px 0 44px; font-size: 16.5px; box-shadow: 0 1px 2px rgba(20,24,31,.04); appearance: none; -webkit-appearance: none; }
+.search input::-webkit-search-cancel-button { -webkit-appearance: none; }
+input:focus-visible, button:focus-visible, .card:focus-visible { outline: 3px solid rgba(11,110,110,.45); outline-offset: 2px; }
+
+/* list */
+.list { padding: 6px 16px calc(28px + var(--sab)); display: grid; gap: 10px; }
+.count { padding: 4px 20px 0; font-size: 14px; color: var(--muted); }
+.card { display: block; background: var(--card); border-radius: 16px; padding: 14px 16px; box-shadow: var(--shadow); min-height: 72px; cursor: pointer; text-align: left; }
+.card:active { transform: scale(.992); background: #fafbfc; }
+.card .t { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
+.card .title { font-weight: 650; font-size: 17px; }
+.card .meta { color: var(--muted); font-size: 15px; margin-top: 3px; display: flex; justify-content: space-between; gap: 8px; }
+.pill { display: inline-block; font-size: 12.5px; font-weight: 650; padding: 4px 10px; border-radius: 999px; white-space: nowrap; letter-spacing: .01em; }
+.pill.planned { background: var(--plan-soft); color: var(--plan); }
+.pill.in-progress { background: var(--accent-soft); color: var(--accent-dark); }
+.pill.done { background: #eceef1; color: #4a5260; }
+.pill.pending-approval { background: var(--warn-soft); color: var(--warn); }
+.empty { text-align: center; color: var(--muted); padding: 40px 0; }
+
+/* detail */
+.back { display: inline-flex; align-items: center; gap: 4px; height: 44px; margin-left: -8px; padding: 0 10px 0 4px; border: 0; background: none; color: var(--accent-dark); font-weight: 600; cursor: pointer; border-radius: 12px; }
+.back svg { width: 22px; height: 22px; }
+.detail { padding: 4px 16px calc(120px + var(--sab)); }
+.detail h2 { margin: 6px 0 4px; font-size: 26px; line-height: 1.2; letter-spacing: -.015em; }
+.sub { color: var(--muted); }
+.panel { background: var(--card); border-radius: 16px; box-shadow: var(--shadow); margin-top: 18px; overflow: hidden; }
+.panel h3 { margin: 0; padding: 14px 16px 6px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 650; }
+.line { display: flex; justify-content: space-between; gap: 12px; padding: 13px 16px; border-top: 1px solid var(--line); min-height: 48px; }
+.line:first-of-type { border-top: 0; }
+.line b { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.line.total { background: #f8f9fa; font-weight: 700; }
+.line.extra { background: var(--warn-soft); }
+.cta { position: fixed; left: 0; right: 0; bottom: 0; padding: 14px 16px calc(14px + var(--sab)); background: linear-gradient(to top, var(--bg) 70%, rgba(244,245,247,0)); z-index: 4; }
+
+.btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 52px; border-radius: 14px; border: 0; font-weight: 650; font-size: 17px; cursor: pointer; }
+.btn.primary { background: var(--accent); color: #fff; box-shadow: 0 2px 6px rgba(11,110,110,.35); }
+.btn.primary:active { background: var(--accent-dark); }
+.btn.secondary { background: #eef0f3; color: var(--ink); }
+.btn[aria-disabled="true"] { opacity: .85; pointer-events: none; }
+.spin { width: 20px; height: 20px; border-radius: 50%; border: 3px solid rgba(255,255,255,.4); border-top-color: #fff; animation: spin .7s linear infinite; display: none; }
+.btn[aria-busy="true"] .spin { display: block; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* sheet */
+.backdrop { position: fixed; inset: 0; background: rgba(15,20,28,.45); opacity: 0; pointer-events: none; transition: opacity 200ms ease-out; z-index: 20; }
+.sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 21; background: var(--card); border-radius: 22px 22px 0 0; padding: 10px 16px calc(16px + var(--sab)); box-shadow: 0 -8px 30px rgba(15,20,28,.18);
+  transform: translateY(105%); transition: transform 200ms ease-out; max-height: 92vh; overflow-y: auto; visibility: hidden; }
+body.sheet-open .backdrop { opacity: 1; pointer-events: auto; }
+body.sheet-open .sheet { transform: none; visibility: visible; }
+.grab { width: 40px; height: 5px; border-radius: 3px; background: #d3d8de; margin: 0 auto 12px; }
+.sheet h2 { margin: 0 0 4px; font-size: 22px; }
+.field { display: block; margin-top: 14px; }
+.field span { display: block; font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+.field input { width: 100%; height: 52px; border-radius: 12px; border: 1.5px solid #cfd5dc; padding: 0 14px; font-size: 17px; background: #fff; appearance: none; -webkit-appearance: none; }
+.field input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px rgba(11,110,110,.2); }
+.actions { display: grid; gap: 10px; margin-top: 18px; }
+@media (min-width: 560px) { body { max-width: 520px; margin: 0 auto; } .cta, .sheet { left: 50%; right: auto; width: 520px; margin-left: -260px; } }
+
+/* done */
+.donewrap { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px 24px calc(24px + var(--sab)); gap: 6px; }
+.donewrap p { margin: 0; color: var(--muted); max-width: 300px; }
+.donewrap h2 { margin: 18px 0 2px; font-size: 26px; }
+.donewrap .btn { margin-top: 28px; max-width: 340px; }
+.check { width: 112px; height: 112px; }
+.check circle { fill: var(--accent-soft); transform-origin: center; animation: pop 400ms ease-out both; }
+.check path { fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 60; stroke-dashoffset: 60; animation: draw 350ms 200ms ease-out forwards; }
+@keyframes pop { from { transform: scale(.4); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .check circle, .check path { animation-duration: 1ms; } }
+</style>
+</head>
+<body>
+
+<section class="screen" id="s-list" hidden>
+  <header class="top">
+    <div class="row"><h1>Mine jobber</h1><span class="chip">tor. 8. okt.</span></div>
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="q" aria-label="Søk i jobber" placeholder="Søk i jobber" autocomplete="off" enterkeyhint="search">
+    </div>
+  </header>
+  <div class="count" id="count" aria-live="polite"></div>
+  <div class="list" id="list"></div>
+</section>
+
+<section class="screen" id="s-job" hidden>
+  <header class="top plain">
+    <button class="back" id="back" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>Jobber</button>
+  </header>
+  <div class="detail" id="detail"></div>
+  <div class="cta"><button class="btn primary" id="extra-open" data-testid="extra-open" type="button">Legg til ekstraarbeid</button></div>
+</section>
+
+<section class="screen" id="s-done" hidden>
+  <div class="donewrap">
+    <svg class="check" viewBox="0 0 112 112" aria-hidden="true"><circle cx="56" cy="56" r="54"/><path d="M34 58l16 16 28-32"/></svg>
+    <h2 id="done-status" data-testid="done-status" role="status">Sendt til kunden</h2>
+    <p>Kunden får en melding og kan godkjenne ekstraarbeidet. Du ser svaret i jobblisten.</p>
+    <button class="btn primary" id="back-to-list" data-testid="back-to-list" type="button">Tilbake til jobber</button>
+  </div>
+</section>
+
+<div class="backdrop" id="backdrop"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Ekstraarbeid" aria-hidden="true">
+  <div class="grab"></div>
+  <h2>Ekstraarbeid</h2>
+  <div class="sub" id="sheet-sub"></div>
+  <label class="field"><span>Beskrivelse</span><input id="extra-text" data-testid="extra-text" aria-label="Beskrivelse" type="text" placeholder="F.eks. ekstra sluk i gulv" autocomplete="off"></label>
+  <label class="field"><span>Beløp (kr)</span><input id="extra-amount" data-testid="extra-amount" aria-label="Beløp" inputmode="numeric" pattern="[0-9]*" type="text" placeholder="0" autocomplete="off"></label>
+  <div class="actions">
+    <button class="btn primary" id="extra-send" data-testid="extra-send" type="button"><span class="spin" aria-hidden="true"></span><span>Send til kunden</span></button>
+    <button class="btn secondary" id="extra-cancel" type="button">Avbryt</button>
+  </div>
+</div>
+
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const kr = (n) => new Intl.NumberFormat('nb-NO').format(n).replace(/ | /g, ' ') + ' kr';
+  const STATUS = { planned: 'Planlagt', 'in-progress': 'Pågår', done: 'Ferdig', 'pending-approval': 'Venter på godkjenning' };
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  let jobs = [], current = null, firstRender;
+  const scrollPos = {};
+  let resolveFirst; firstRender = new Promise((r) => { resolveFirst = r; });
+
+  function pill(s) { return `<span class="pill ${s}">${STATUS[s] || s}</span>`; }
+
+  function renderList() {
+    const q = $('q').value.trim().toLowerCase();
+    const shown = jobs.filter((j) => !q || (j.title + ' ' + j.customer + ' ' + j.address).toLowerCase().includes(q));
+    $('count').textContent = q ? `${shown.length} treff` : `${jobs.length} jobber`;
+    $('list').innerHTML = shown.length ? shown.map((j) => `
+      <div class="card" role="link" tabindex="0" aria-label="${esc(j.title)}" data-testid="job-card-${j.id}" data-id="${j.id}">
+        <div class="t"><span class="title">${esc(j.title)}</span>${pill(j.status)}</div>
+        <div class="meta"><span>${esc(j.customer)} · ${esc(j.address.split(',')[1] || '')}</span><span>${kr(j.amount)}</span></div>
+      </div>`).join('') : '<div class="empty">Ingen jobber funnet</div>';
+  }
+
+  function renderDetail(j) {
+    const extras = j.extras.map((e) => `<div class="line extra"><span>Ekstra: ${esc(e.text)}</span><b>${kr(e.amount)}</b></div>`).join('');
+    const total = j.amount + j.extras.reduce((a, e) => a + e.amount, 0);
+    $('detail').innerHTML = `
+      <div>${pill(j.status)}</div>
+      <h2>${esc(j.title)}</h2>
+      <div class="sub">${esc(j.customer)}<br>${esc(j.address)}</div>
+      <div class="panel"><h3>Linjer</h3>
+        ${j.lines.map((l) => `<div class="line"><span>${esc(l.text)}</span><b>${kr(l.amount)}</b></div>`).join('')}
+        ${extras}
+        <div class="line total"><span>Sum</span><b>${kr(total)}</b></div>
+      </div>`;
+  }
+
+  async function load() {
+    const r = await fetch('/api/jobs', { cache: 'no-store' });
+    jobs = (await r.json()).jobs;
+  }
+
+  function show(name) {
+    for (const s of ['list', 'job', 'done']) $('s-' + s).hidden = s !== name;
+  }
+
+  async function route() {
+    const h = location.hash || '#/';
+    scrollPos[route.last] = window.scrollY; route.last = h;
+    closeSheet(true);
+    let m;
+    if ((m = h.match(/^#\/job\/(\d+)/))) {
+      if (!jobs.length) await load();
+      current = jobs.find((j) => j.id === Number(m[1]));
+      if (!current) { location.replace('#/'); return; }
+      renderDetail(current); show('job'); window.scrollTo(0, 0);
+    } else if (h === '#/done') {
+      show('done'); window.scrollTo(0, 0);
+    } else {
+      await load(); renderList(); show('list');
+      window.scrollTo(0, scrollPos['#/'] || 0);
+    }
+    resolveFirst();
+  }
+
+  /* sheet */
+  const sheet = $('sheet');
+  function fitSheet() {
+    const vv = window.visualViewport; if (!vv) return;
+    const bottom = Math.max(0, window.innerHeight - vv.offsetTop - vv.height);
+    sheet.style.bottom = bottom + 'px';
+    sheet.style.maxHeight = Math.max(240, vv.height - 16) + 'px';
+  }
+  function openSheet() {
+    $('sheet-sub').textContent = current ? current.title : '';
+    $('extra-text').value = ''; $('extra-amount').value = '';
+    fitSheet(); document.body.classList.add('sheet-open'); sheet.setAttribute('aria-hidden', 'false');
+  }
+  function closeSheet(instant) {
+    if (!document.body.classList.contains('sheet-open')) return;
+    document.body.classList.remove('sheet-open'); sheet.setAttribute('aria-hidden', 'true');
+    if (document.activeElement && sheet.contains(document.activeElement)) document.activeElement.blur();
+  }
+  if (window.visualViewport) {
+    visualViewport.addEventListener('resize', fitSheet);
+    visualViewport.addEventListener('scroll', fitSheet);
+  }
+  window.addEventListener('resize', fitSheet);
+
+  async function send() {
+    if (sheet.getAttribute('aria-busy') === 'true' || !current) return;
+    const btn = $('extra-send');
+    sheet.setAttribute('aria-busy', 'true'); btn.setAttribute('aria-busy', 'true'); btn.setAttribute('aria-disabled', 'true');
+    try {
+      const amount = Number($('extra-amount').value.replace(/\D/g, '')) || 0;
+      const r = await fetch(`/api/jobs/${current.id}/extra`, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ text: $('extra-text').value, amount }) });
+      if (!r.ok) throw new Error('http ' + r.status);
+      await load();
+      closeSheet(); location.hash = '#/done';
+    } finally {
+      sheet.removeAttribute('aria-busy'); btn.removeAttribute('aria-busy'); btn.removeAttribute('aria-disabled');
+    }
+  }
+
+  /* events */
+  $('q').addEventListener('input', renderList);
+  $('list').addEventListener('click', (e) => { const c = e.target.closest('.card'); if (c) location.hash = '#/job/' + c.dataset.id; });
+  $('list').addEventListener('keydown', (e) => { if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('card')) { e.preventDefault(); e.target.click(); } });
+  $('back').addEventListener('click', () => { if (history.length > 1) history.back(); else location.hash = '#/'; });
+  $('extra-open').addEventListener('click', openSheet);
+  $('extra-cancel').addEventListener('click', () => closeSheet());
+  $('backdrop').addEventListener('click', () => closeSheet());
+  $('extra-send').addEventListener('click', send);
+  $('back-to-list').addEventListener('click', () => { location.hash = '#/'; });
+  window.addEventListener('hashchange', route);
+
+  window.__fixture = { ready: Promise.all([document.fonts ? document.fonts.ready : null, firstRender]).then(() => true), route: () => location.hash || '#/' };
+  route();
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(() => {});
+})();
+</script>
+</body>
+</html>

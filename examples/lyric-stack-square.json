@@ -1,0 +1,9 @@
+{
+  "template": "lyric-stack",
+  "name": "lyric-stack-square",
+  "format": "square",
+  "fps": 60,
+  "bpm": 96,
+  "seed": 11,
+  "content": { "lyricsSrc": "lyrics/demo-verse.json", "title": "Hold The Line", "artist": "Demo Artist" }
+}

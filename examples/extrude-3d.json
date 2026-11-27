@@ -1,0 +1,26 @@
+{
+  "template": "extrude-3d",
+  "name": "extrude-3d",
+  "format": "square",
+  "fps": 60,
+  "duration": 12,
+  "bpm": 120,
+  "seed": 3,
+  "content": {
+    "cards": [
+      "MAKE IT",
+      "BIGGER",
+      "MAKE IT",
+      "LOUDER",
+      "MAKE IT 3D"
+    ],
+    "sub": "THE SOLID ISSUE — NO. 3"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 20
+    }
+  }
+}

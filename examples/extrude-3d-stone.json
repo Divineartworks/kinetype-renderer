@@ -1,0 +1,28 @@
+{
+  "template": "extrude-3d",
+  "name": "extrude-3d-stone",
+  "format": "square",
+  "fps": 60,
+  "duration": 12,
+  "bpm": 120,
+  "seed": 3,
+  "content": {
+    "cards": [
+      "BUILT",
+      "TO",
+      "LAST",
+      "BUILT TO LAST"
+    ],
+    "sub": "EST. 1998"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 20
+    }
+  },
+  "params": {
+    "style": "stone"
+  }
+}

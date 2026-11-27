@@ -1,0 +1,37 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>kinetype preview</title>
+<script type="importmap">{ "imports": { "opentype.js/": "/node_modules/opentype.js/", "harfbuzzjs": "/node_modules/harfbuzzjs/dist/index.mjs" } }</script>
+</head><body>
+<script type="module">
+import { createEngine } from '/src/kit/engine.js';
+import { mountPlayer } from '/src/runtime/player.js';
+import { MediaHub } from '/src/kit/media.js';
+import { useHarfBuzz } from '/src/kit/font.js';
+import * as hb from 'harfbuzzjs';
+useHarfBuzz(hb);
+const r = await (await fetch('/__resolved')).json();
+if (r.error) { document.body.innerHTML = `<pre style="color:#f66;padding:24px;font:14px monospace;white-space:pre-wrap">${r.error.replace(/</g,'&lt;')}</pre>`; }
+else {
+  const fontBuffers = {};
+  await Promise.all(Object.entries(r.fontUrls).map(async ([k, u]) => { fontBuffers[k] = await (await fetch(u)).arrayBuffer(); }));
+  const v = '?v=' + Date.now();
+  const template = (await import(r.templateUrl + v)).default;
+  const templates = {};
+  for (const [id, url] of Object.entries(r.templateUrls || {})) templates[id] = (await import(url + v)).default;
+  const media = new MediaHub(r.media || {});
+  await media.init();
+  const canvas = document.createElement('canvas');
+  const engine = createEngine({ canvas, spec: r.spec, template, templates, media, fontBuffers, readback: false });
+  await engine.init();
+  let audio = null;
+  if (r.audioUrl) { audio = new Audio(r.audioUrl); audio.loop = engine.loop; }
+  const player = mountPlayer(engine, { audio, title: `${template.id} · live` });
+  const saved = Number(sessionStorage.getItem('kt-t') || 0);
+  if (saved) { player.pause(); player.seek(saved); }
+  window.seek = (t) => { player.pause(); player.seek(t); };
+  window.kinetype = { engine, player };
+  addEventListener('beforeunload', () => { try { sessionStorage.setItem('kt-t', String(player.time)); } catch {} });
+}
+new EventSource('/__events').onmessage = () => location.reload();
+</script>
+</body></html>

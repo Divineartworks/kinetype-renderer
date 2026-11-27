@@ -1,0 +1,19 @@
+{
+  "template": "countdown",
+  "name": "countdown-vertical",
+  "format": "vertical",
+  "fps": 60,
+  "bpm": 124,
+  "seed": 8,
+  "palette": { "a": "#FF2BD6" },
+  "params": { "beatsPerItem": 6, "recapBeats": 8 },
+  "content": {
+    "kicker": "SHORTS / RANKED",
+    "title": "3 MISTAKES KILLING YOUR HOOK",
+    "items": [
+      { "title": "TALKING BEFORE THE CUT", "detail": "first frame, first word. no warm-up." },
+      { "title": "TINY CAPTIONS", "detail": "phones are small. type is not." },
+      { "title": "LOGO INTROS", "detail": "nobody waits for your brand." }
+    ]
+  }
+}

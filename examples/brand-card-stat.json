@@ -1,0 +1,14 @@
+{
+  "template": "brand-card",
+  "name": "brand-card-stat",
+  "format": "vertical",
+  "fps": 30,
+  "seed": 3,
+  "content": {
+    "mode": "stat",
+    "value": "30",
+    "suffix": " s",
+    "label": "from first click to a project with tasks",
+    "footnote": "Illustrative: demo workspace, not a customer average."
+  }
+}

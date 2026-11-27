@@ -1,0 +1,6 @@
+node_modules/
+out/
+*.tmp
+.DS_Store
+examples/local/
+fixtures/captures/*/frames/

@@ -1,0 +1,25 @@
+{
+  "template": "echo-stack",
+  "name": "echo-stack",
+  "format": "square",
+  "fps": 60,
+  "duration": 12,
+  "loop": true,
+  "bpm": 120,
+  "seed": 11,
+  "content": {
+    "words": [
+      "LOUDER"
+    ],
+    "message": "LOUDER THAN EVER",
+    "sub": "FRI 21:00 — WAREHOUSE 9"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 19
+    },
+    "loopExact": true
+  }
+}

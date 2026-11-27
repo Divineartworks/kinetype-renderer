@@ -1,0 +1,20 @@
+{
+  "template": "liquid-type",
+  "format": "square",
+  "fps": 60,
+  "bpm": 110,
+  "seed": 4,
+  "content": {
+    "lines": [
+      "STAY LIQUID",
+      "BEND THE SIGNAL",
+      "NEVER STATIC"
+    ],
+    "final": "KINETYPE",
+    "label": "SIGNAL / 04"
+  },
+  "name": "liquid-type-mercury",
+  "params": {
+    "style": "mercury"
+  }
+}

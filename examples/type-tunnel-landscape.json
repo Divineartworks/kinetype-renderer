@@ -1,0 +1,26 @@
+{
+  "template": "type-tunnel",
+  "name": "type-tunnel-landscape",
+  "format": "landscape",
+  "fps": 60,
+  "duration": 14,
+  "bpm": 120,
+  "seed": 5,
+  "content": {
+    "words": [
+      "SIGNAL",
+      "NOISE",
+      "SIGNAL",
+      "NOISE"
+    ],
+    "finale": "TUNE IN",
+    "sub": "LIVE — FRIDAY 21:00"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 22
+    }
+  }
+}

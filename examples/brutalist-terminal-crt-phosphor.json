@@ -1,0 +1,52 @@
+{
+  "template": "brutalist-terminal",
+  "format": "landscape",
+  "fps": 60,
+  "bpm": 120,
+  "seed": 5,
+  "content": {
+    "title": "render.sh  --  zsh",
+    "prompt": "~/studio $",
+    "steps": [
+      {
+        "cmd": "kinetype templates",
+        "output": [
+          {
+            "text": "12 templates  /  0 dependencies on luck",
+            "dim": true
+          },
+          "street-poster  lyric-stack  split-flap  countdown"
+        ]
+      },
+      {
+        "cmd": "kinetype render bumper.json --samples 8",
+        "output": [
+          {
+            "progress": "frames",
+            "beats": 3
+          },
+          {
+            "progress": "encode",
+            "beats": 2
+          },
+          {
+            "text": "verdict: PASS  (frame 0 == frame 1199)",
+            "highlight": true
+          }
+        ]
+      },
+      {
+        "cmd": "ship --everywhere",
+        "output": [
+          "uploaded: x  youtube  shorts"
+        ]
+      }
+    ],
+    "statement": "SHIP IT.",
+    "sub": "deterministic. every frame. every time."
+  },
+  "name": "brutalist-terminal-crt-phosphor",
+  "params": {
+    "style": "crt-phosphor"
+  }
+}

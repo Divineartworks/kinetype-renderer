@@ -1,0 +1,23 @@
+{
+  "template": "riso-print",
+  "name": "riso-print-botanical",
+  "format": "square",
+  "fps": 60,
+  "duration": 10,
+  "bpm": 96,
+  "seed": 3,
+  "content": {
+    "headline": "SLOW GROWTH",
+    "hero": "FERN",
+    "subhead": "A FIELD GUIDE TO PATIENT GARDENS",
+    "labels": [
+      "VOL. 2",
+      "SPRING",
+      "48PP"
+    ],
+    "issue": "02"
+  },
+  "params": {
+    "style": "botanical"
+  }
+}

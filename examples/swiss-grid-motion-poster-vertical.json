@@ -1,0 +1,8 @@
+{
+  "template": "swiss-grid",
+  "name": "swiss-grid-motion-poster-vertical",
+  "format": "vertical",
+  "seed": 3,
+  "content": { "number": "07", "kicker": "PART SEVEN", "title": "Direct the machine", "subtitle": "Taste is the one thing you cannot outsource.", "points": ["Pick one reference", "Write the shot", "Cut on the beat"], "footer": "FIELD GUIDE" },
+  "params": { "style": "motion-poster" }
+}

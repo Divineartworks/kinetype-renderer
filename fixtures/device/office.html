@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b6e6e">
+<title>Verkstedlogg – Kontor</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<!--POLL-->
+<style>
+:root { --accent:#0b6e6e; --accent-dark:#085858; --accent-soft:#e0f0ef; --bg:#f4f5f7; --card:#fff; --ink:#14181f; --muted:#5b6573; --line:#e3e6ea;
+  --warn:#9a4a00; --warn-soft:#fdeed8; --shadow:0 1px 2px rgba(20,24,31,.06),0 4px 14px rgba(20,24,31,.06);
+  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink); font-size:16.5px; line-height:1.4; }
+button { font:inherit; color:inherit; }
+.wrap { max-width:960px; margin:0 auto; padding:calc(env(safe-area-inset-top,0px) + 20px) 16px 40px; }
+header { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.brand { display:flex; align-items:center; gap:12px; }
+.brand img { width:40px; height:40px; border-radius:10px; }
+h1 { margin:0; font-size:24px; letter-spacing:-.015em; }
+.upd { color:var(--muted); font-size:14px; font-variant-numeric:tabular-nums; }
+.bar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:18px 0 14px; flex-wrap:wrap; }
+[role=tablist] { display:inline-flex; background:#e8ebef; padding:4px; border-radius:14px; gap:4px; }
+[role=tab] { min-height:44px; padding:0 11px; font-size:15px; border:0; background:none; border-radius:11px; font-weight:600; color:var(--muted); cursor:pointer; }
+[role=tab][aria-selected=true] { background:var(--card); color:var(--ink); box-shadow:0 1px 3px rgba(20,24,31,.12); }
+.btn { min-height:44px; padding:0 14px; border-radius:12px; border:0; background:var(--accent); color:#fff; font-weight:650; cursor:pointer; box-shadow:0 2px 6px rgba(11,110,110,.3); }
+.grid { display:grid; grid-template-columns:3fr 2fr; gap:16px; align-items:start; }
+@media (max-width:720px) { .grid { grid-template-columns:1fr; } }
+.panel { background:var(--card); border-radius:16px; box-shadow:var(--shadow); overflow:hidden; }
+.panel h2 { margin:0; padding:14px 16px 8px; font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); }
+.item { display:flex; justify-content:space-between; gap:12px; align-items:center; padding:13px 16px; border-top:1px solid var(--line); min-height:60px; }
+.item .t { font-weight:650; }
+.item .s { color:var(--muted); font-size:15px; }
+.item b { font-variant-numeric:tabular-nums; white-space:nowrap; }
+.pill { font-size:12.5px; font-weight:650; padding:4px 10px; border-radius:999px; background:var(--warn-soft); color:var(--warn); white-space:nowrap; }
+.pill.ok { background:var(--accent-soft); color:var(--accent-dark); }
+.empty { padding:28px 16px; color:var(--muted); text-align:center; border-top:1px solid var(--line); }
+.item.new { animation:hl 1s ease-out; }
+@keyframes hl { from { background:#ffe9b8; } to { background:transparent; } }
+.badge { display:inline-block; min-width:22px; padding:1px 7px; border-radius:999px; background:var(--warn); color:#fff; font-size:13px; margin-left:6px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand"><img src="/icon.svg" alt=""><h1>Kontor</h1></div>
+    <span class="upd" id="upd" aria-live="off">Sist oppdatert –</span>
+  </header>
+  <div class="bar">
+    <div role="tablist" aria-label="Visning">
+      <button role="tab" id="tab-pending" aria-selected="true" data-tab="pending">Til godkjenning<span class="badge" id="badge">0</span></button>
+      <button role="tab" id="tab-all" aria-selected="false" data-tab="all">Alle jobber</button>
+    </div>
+    <button class="btn" id="refresh" type="button">Oppdater</button>
+  </div>
+  <div class="grid">
+    <div class="panel" id="main"><h2 id="main-h">Til godkjenning</h2><div id="main-list"></div></div>
+    <div class="panel"><h2>Siste hendelser</h2><div id="events"></div></div>
+  </div>
+</div>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const POLL = window.POLL_MS || 2000;
+  const kr = (n) => new Intl.NumberFormat('nb-NO').format(n).replace(/ | /g, ' ') + ' kr';
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const STATUS = { planned: 'Planlagt', 'in-progress': 'Pågår', done: 'Ferdig', 'pending-approval': 'Venter' };
+  let tab = 'pending', version = -1, jobs = [], seen = new Set(), first = true, lastEvent = null, busy = false;
+
+  function hhmmss(iso) { return new Date(iso).toLocaleTimeString('nb-NO', { hour12: false, timeZone: 'Europe/Oslo' }); }
+
+  function render() {
+    const pending = jobs.filter((j) => j.status === 'pending-approval');
+    $('badge').textContent = pending.length;
+    $('main-h').textContent = tab === 'pending' ? 'Til godkjenning' : 'Alle jobber';
+    const list = tab === 'pending' ? pending : jobs;
+    $('main-list').innerHTML = list.length ? list.map((j) => {
+      const extra = j.extras.reduce((a, e) => a + e.amount, 0);
+      const isNew = !first && j.status === 'pending-approval' && !seen.has(j.id + ':' + j.extras.length);
+      return `<div class="item${isNew ? ' new' : ''}" data-job="${j.id}">
+        <div><div class="t">${esc(j.title)}</div><div class="s">${esc(j.customer)}${j.extras.length ? ' · ' + esc(j.extras[j.extras.length - 1].text) : ''}</div></div>
+        <div style="text-align:right">${j.status === 'pending-approval' ? `<b>+${kr(extra)}</b><br>` : `<b>${kr(j.amount)}</b><br>`}<span class="pill${j.status === 'pending-approval' ? '' : ' ok'}">${STATUS[j.status] || j.status}</span></div></div>`;
+    }).join('') : '<div class="empty">Ingenting venter på godkjenning</div>';
+    for (const j of pending) seen.add(j.id + ':' + j.extras.length);
+    first = false;
+    const ev = jobs.flatMap((j) => j.extras.map((e, i) => ({ j, e, i })));
+    $('events').innerHTML = ev.length ? ev.reverse().slice(0, 8).map(({ j, e }) => `<div class="item"><div><div class="t">${esc(j.title)}</div><div class="s">Ekstraarbeid: ${esc(e.text)}</div></div><b>${kr(e.amount)}</b></div>`).join('') : '<div class="empty">Ingen hendelser ennå</div>';
+  }
+
+  async function refresh() {
+    if (busy) return; busy = true;
+    try {
+      const s = await (await fetch('/api/state', { cache: 'no-store' })).json();
+      lastEvent = s.lastEvent;
+      $('upd').textContent = 'Sist oppdatert ' + hhmmss(lastEvent.at);
+      if (s.version !== version) {
+        const d = await (await fetch('/api/jobs', { cache: 'no-store' })).json();
+        jobs = d.jobs; version = d.version; render();
+      }
+    } catch { /* offline: keep last view */ } finally { busy = false; }
+  }
+
+  function setTab(t) {
+    tab = t;
+    for (const b of document.querySelectorAll('[role=tab]')) b.setAttribute('aria-selected', String(b.dataset.tab === t));
+    render(); refresh();
+  }
+  document.querySelectorAll('[role=tab]').forEach((b) => b.addEventListener('click', () => setTab(b.dataset.tab)));
+  $('refresh').addEventListener('click', () => { version = -1; refresh(); });
+  window.addEventListener('hashchange', refresh);
+  window.addEventListener('online', refresh);
+  setInterval(refresh, POLL);
+  refresh();
+})();
+</script>
+</body>
+</html>

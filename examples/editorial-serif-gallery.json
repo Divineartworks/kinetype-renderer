@@ -1,0 +1,21 @@
+{
+  "template": "editorial-serif",
+  "format": "landscape",
+  "fps": 60,
+  "duration": 10,
+  "bpm": 72,
+  "seed": 11,
+  "content": {
+    "mode": "title",
+    "number": "04",
+    "section": "The Long Read",
+    "headline": "The quiet death of the keyframe",
+    "swap": "quiet",
+    "standfirst": "How a generation of editors stopped animating by hand \u2014 and started directing machines that animate for them.",
+    "byline": "Words \u2014 Sam Lund \u00b7 Film \u2014 Studio North"
+  },
+  "name": "editorial-serif-gallery",
+  "params": {
+    "style": "gallery"
+  }
+}

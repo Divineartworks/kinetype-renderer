@@ -1,0 +1,3 @@
+{ "template": "echo-stack", "name": "echo-stack-arabic", "format": "square", "seed": 4,
+  "fonts": { "display": { "family": "Noto Sans Arabic", "weight": 700 } },
+  "content": { "words": ["صوت"], "message": "أعلى من أي وقت", "sub": "LIVE — DUBAI" } }

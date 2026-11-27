@@ -1,0 +1,87 @@
+{
+  "template": "sequence",
+  "name": "ui-demo-sequence",
+  "format": "landscape",
+  "fps": 30,
+  "seed": 11,
+  "render": {
+    "shutter": 0.5
+  },
+  "params": {
+    "transition": "dip",
+    "transitionDuration": 0.5,
+    "snapToBeats": false
+  },
+  "media": {
+    "cap": {
+      "capture": "../fixtures/captures/demo-app-desktop/capture.json"
+    },
+    "logo": {
+      "src": "../fixtures/brand/fieldnote-logo.svg"
+    }
+  },
+  "content": {
+    "shots": [
+      {
+        "template": "brand-card",
+        "content": {
+          "mode": "hook",
+          "logo": "logo",
+          "kicker": "FIELDNOTE",
+          "headline": "Every job, one calm place"
+        }
+      },
+      {
+        "template": "ui-demo",
+        "content": {
+          "capture": "cap",
+          "frame": "browser",
+          "urlLabel": "app.fieldnote.dev",
+          "range": {
+            "from": "open",
+            "to": "created"
+          },
+          "retime": [
+            {
+              "at": "open",
+              "hold": 0.5
+            },
+            {
+              "from": "client",
+              "to": "priority",
+              "speed": 1.8
+            }
+          ],
+          "callouts": [
+            {
+              "at": "new-project",
+              "text": "Start a project in one click"
+            },
+            {
+              "at": "priority",
+              "text": "Flag what matters"
+            }
+          ]
+        }
+      },
+      {
+        "template": "brand-card",
+        "content": {
+          "mode": "cta",
+          "logo": "logo",
+          "headline": "Run your next job on Fieldnote",
+          "cta": "Start free",
+          "url": "fieldnote.dev",
+          "product": {
+            "capture": "cap",
+            "at": "done",
+            "urlLabel": "app.fieldnote.dev"
+          }
+        }
+      }
+    ]
+  },
+  "palette": {
+    "bg": "#ECEAE5"
+  }
+}

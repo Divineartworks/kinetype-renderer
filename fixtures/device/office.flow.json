@@ -1,0 +1,17 @@
+{
+  "schema": "kinetype.flow.v1",
+  "name": "device-office",
+  "app": { "name": "Verkstedlogg (fixture)", "baseUrl": "http://10.0.2.2:8787" },
+  "device": { "kind": "android", "target": { "browser": "chrome", "transport": "adb" } },
+  "tempo": { "preset": "demo-artist" },
+  "seed": 22,
+  "calibrate": "overlay",
+  "steps": [
+    { "id": "open-office", "action": "goto", "url": "/office?poll=20000", "hold": 0.4 },
+    { "id": "office-ready", "action": "mark" },
+    { "id": "wait-phone", "action": "sync", "device": "phone", "mark": "sent", "timeout": 60 },
+    { "id": "refresh-tab", "action": "refresh", "via": "tap", "target": { "role": "button", "name": "Oppdater" }, "until": { "selector": "#main-list [data-job=\"17\"]" }, "timeout": 25 },
+    { "id": "seen", "action": "observe", "target": { "selector": "#main-list [data-job=\"17\"]" }, "label": "Til godkjenning" },
+    { "id": "office-done", "action": "mark", "hold": 1.0 }
+  ]
+}

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Fieldnote — Projects</title>
+<!-- Synthetic demo app for kinetype ui-demo fixtures. Its whole state is a pure
+     function of time: window.__seek(t) sets every visual property, so frame i of
+     the fixture is reproducible byte for byte. No CSS transitions, no timers. -->
+<style>
+@font-face { font-family: Inter; font-weight: 400; src: url(/fonts/files/Inter-400.ttf); }
+@font-face { font-family: Inter; font-weight: 500; src: url(/fonts/files/Inter-500.ttf); }
+@font-face { font-family: Inter; font-weight: 600; src: url(/fonts/files/Inter-600.ttf); }
+@font-face { font-family: Inter; font-weight: 700; src: url(/fonts/files/Inter-700.ttf); }
+:root { --bg: #F7F7F5; --panel: #FFFFFF; --line: #E7E6E3; --ink: #1A1B1E; --ink2: #5C5F66; --ink3: #8B8E95; --acc: #3651E0; --acc2: #EDF0FD; --ok: #1F8A5B; --okbg: #E6F4EC; --warn: #B4690E; --warnbg: #FBF0DF; --mute: #EFEEEB; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 1440px; height: 900px; overflow: hidden; background: var(--bg); color: var(--ink); font: 400 14px/1.45 Inter, sans-serif; -webkit-font-smoothing: antialiased; }
+.app { position: relative; display: grid; grid-template-columns: 232px 1fr; height: 900px; }
+.side { background: #FBFBFA; border-right: 1px solid var(--line); padding: 18px 14px; display: flex; flex-direction: column; gap: 4px; }
+.brand { display: flex; align-items: center; gap: 10px; padding: 4px 8px 18px; font-weight: 700; font-size: 15px; letter-spacing: -0.01em; }
+.mark { width: 26px; height: 26px; border-radius: 7px; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 13px; font-weight: 700; }
+.nav { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 8px; color: var(--ink2); font-weight: 500; }
+.nav i { width: 16px; height: 16px; border-radius: 4px; border: 1.6px solid currentColor; opacity: .75; display: inline-block; }
+.nav.on { background: var(--mute); color: var(--ink); }
+.nav .n { margin-left: auto; font-size: 12px; color: var(--ink3); }
+.sect { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--ink3); padding: 18px 10px 6px; }
+.me { margin-top: auto; display: flex; align-items: center; gap: 10px; padding: 10px; border-top: 1px solid var(--line); }
+.av { width: 30px; height: 30px; border-radius: 50%; background: #D9DEF7; color: #2A3A9C; display: grid; place-items: center; font-size: 12px; font-weight: 600; }
+.me b { font-weight: 600; font-size: 13px; display: block; } .me span { font-size: 12px; color: var(--ink3); }
+.main { position: relative; overflow: hidden; }
+.top { height: 60px; display: flex; align-items: center; gap: 12px; padding: 0 28px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.crumb { color: var(--ink3); font-weight: 500; } .crumb b { color: var(--ink); font-weight: 600; }
+.search { margin-left: auto; width: 300px; height: 36px; border: 1px solid var(--line); border-radius: 9px; display: flex; align-items: center; padding: 0 12px; color: var(--ink3); gap: 8px; background: #FBFBFA; }
+.search kbd { margin-left: auto; font: 500 11px Inter; border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px; }
+.btn { height: 36px; padding: 0 14px; border-radius: 9px; border: 1px solid var(--line); background: var(--panel); font: 600 13.5px Inter; color: var(--ink); display: inline-flex; align-items: center; gap: 8px; }
+.btn.pri { background: var(--acc); border-color: var(--acc); color: #fff; }
+.btn .plus { font-size: 17px; line-height: 0; margin-top: -1px; }
+.page { position: absolute; left: 0; right: 0; top: 60px; bottom: 0; padding: 30px 36px; overflow: hidden; }
+h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
+.sub { color: var(--ink2); margin-top: 4px; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.card .k { color: var(--ink2); font-size: 12.5px; font-weight: 500; } .card .v { font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-top: 4px; }
+.card .d { font-size: 12px; color: var(--ok); font-weight: 600; margin-left: 8px; }
+table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+th { text-align: left; font-size: 12px; font-weight: 600; color: var(--ink3); padding: 11px 18px; border-bottom: 1px solid var(--line); background: #FBFBFA; }
+td { padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 13.5px; }
+tr:last-child td { border-bottom: 0; }
+td.p { font-weight: 600; } td.m { color: var(--ink2); } td.r { text-align: right; font-variant-numeric: tabular-nums; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 3px 9px; border-radius: 99px; }
+.pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.pill.ok { color: var(--ok); background: var(--okbg); } .pill.wa { color: var(--warn); background: var(--warnbg); } .pill.pl { color: var(--acc); background: var(--acc2); } .pill.mu { color: var(--ink2); background: var(--mute); }
+.scrim { position: absolute; inset: 0; background: rgba(20, 21, 24, .32); }
+.modal { position: absolute; left: 50%; top: 50%; width: 520px; margin-left: -260px; margin-top: -238px; background: var(--panel); border-radius: 16px; border: 1px solid var(--line); box-shadow: 0 24px 60px rgba(20,21,24,.18), 0 2px 6px rgba(20,21,24,.06); padding: 26px 28px 24px; }
+.modal h2 { font-size: 19px; font-weight: 700; letter-spacing: -0.015em; } .modal .sub { font-size: 13.5px; }
+.f { margin-top: 18px; } .f label { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink2); margin-bottom: 7px; }
+.in { height: 42px; border: 1px solid var(--line); border-radius: 10px; padding: 0 13px; display: flex; align-items: center; font-size: 14.5px; background: var(--panel); }
+.in.focus { border-color: var(--acc); box-shadow: 0 0 0 4px rgba(54, 81, 224, .14); }
+.in .ph { color: var(--ink3); }
+.caret { display: inline-block; width: 1.5px; height: 18px; background: var(--acc); margin-left: 1px; vertical-align: -3px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--mute); border-radius: 10px; padding: 3px; height: 42px; }
+.seg span { display: grid; place-items: center; border-radius: 8px; font-weight: 600; font-size: 13.5px; color: var(--ink2); }
+.seg span.on { background: var(--panel); color: var(--ink); box-shadow: 0 1px 3px rgba(20,21,24,.12); }
+.seg span.hi.on { color: #B4361E; }
+.acts { display: flex; justify-content: flex-end; gap: 10px; margin-top: 26px; }
+.toast { position: absolute; right: 28px; bottom: 28px; background: var(--ink); color: #fff; border-radius: 12px; padding: 13px 18px; font-weight: 500; display: flex; gap: 10px; align-items: center; box-shadow: 0 12px 30px rgba(20,21,24,.22); }
+.toast i { width: 18px; height: 18px; border-radius: 50%; background: var(--ok); display: inline-block; }
+.hero { display: flex; align-items: flex-start; gap: 16px; }
+.hero .meta { display: flex; gap: 22px; color: var(--ink2); margin-top: 10px; font-size: 13.5px; } .hero .meta b { color: var(--ink); font-weight: 600; }
+.hero .acts2 { margin-left: auto; display: flex; gap: 10px; }
+.prog { margin: 26px 0 8px; height: 8px; border-radius: 99px; background: var(--mute); overflow: hidden; } .prog div { height: 100%; width: 8%; background: var(--acc); border-radius: 99px; }
+.tabs { display: flex; gap: 26px; border-bottom: 1px solid var(--line); margin-top: 22px; } .tabs span { padding: 10px 0; color: var(--ink2); font-weight: 600; } .tabs span.on { color: var(--ink); box-shadow: inset 0 -2px 0 var(--ink); }
+.task { display: flex; align-items: center; gap: 14px; padding: 14px 18px; border-bottom: 1px solid var(--line); background: var(--panel); }
+.task:first-child { border-radius: 12px 12px 0 0; } .task:last-child { border-radius: 0 0 12px 12px; border-bottom: 0; }
+.tasks { border: 1px solid var(--line); border-radius: 12px; margin-top: 20px; }
+.chk { width: 18px; height: 18px; border-radius: 5px; border: 1.6px solid #C9C8C4; } .chk.on { background: var(--acc); border-color: var(--acc); }
+.task .who { margin-left: auto; } .task .due { width: 90px; text-align: right; color: var(--ink2); font-size: 13px; }
+.task b { font-weight: 600; } .task .s { color: var(--ink3); font-size: 12.5px; display: block; }
+.team { margin-top: 26px; display: flex; align-items: center; gap: 16px; padding: 18px; border: 1px dashed #CFCDC8; border-radius: 12px; }
+.team .t { font-weight: 600; } .team .s { color: var(--ink2); font-size: 13px; }
+.team .btn { margin-left: auto; }
+.hover { background: #2B45CE !important; }
+.press { transform: scale(.97); }
+.hov2 { background: var(--mute) !important; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><span class="mark">F</span>Fieldnote</div>
+    <div class="nav"><i></i>Overview</div>
+    <div class="nav on"><i></i>Projects<span class="n">12</span></div>
+    <div class="nav"><i></i>Schedule</div>
+    <div class="nav"><i></i>Invoices<span class="n">3</span></div>
+    <div class="nav"><i></i>Team</div>
+    <div class="sect">Pinned</div>
+    <div class="nav"><i></i>Riverside lofts</div>
+    <div class="nav"><i></i>Maple school annex</div>
+    <div class="nav"><i></i>Settings</div>
+    <div class="me"><span class="av">MC</span><div><b>Mira Collins</b><span>Owner</span></div></div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div class="crumb" id="crumb">Workspace / <b>Projects</b></div>
+      <div class="search">⌕&nbsp; Search projects<kbd>⌘K</kbd></div>
+      <button class="btn pri" id="new"><span class="plus">+</span>New project</button>
+    </div>
+
+    <section class="page" id="list">
+      <h1>Projects</h1>
+      <div class="sub">12 active · 3 due this week</div>
+      <div class="stats">
+        <div class="card"><div class="k">Active projects</div><div class="v" id="active">12</div></div>
+        <div class="card"><div class="k">Due this week</div><div class="v">3</div></div>
+        <div class="card"><div class="k">Billed this month</div><div class="v">$48,200<span class="d">+12%</span></div></div>
+      </div>
+      <table>
+        <thead><tr><th>Project</th><th>Client</th><th>Status</th><th>Due</th><th style="text-align:right">Budget</th></tr></thead>
+        <tbody id="rows">
+          <tr><td class="p">Riverside lofts</td><td class="m">Arden Living</td><td><span class="pill ok">On track</span></td><td class="m">Oct 12</td><td class="r">$182,000</td></tr>
+          <tr><td class="p">Maple school annex</td><td class="m">County Schools</td><td><span class="pill wa">At risk</span></td><td class="m">Oct 18</td><td class="r">$96,500</td></tr>
+          <tr><td class="p">Old mill kitchen</td><td class="m">J. Okafor</td><td><span class="pill ok">On track</span></td><td class="m">Oct 21</td><td class="r">$38,900</td></tr>
+          <tr><td class="p">Cedar street roof</td><td class="m">Pine &amp; Sons</td><td><span class="pill pl">Planning</span></td><td class="m">Nov 02</td><td class="r">$24,300</td></tr>
+          <tr><td class="p">Northgate offices</td><td class="m">Northgate Ltd</td><td><span class="pill ok">On track</span></td><td class="m">Nov 15</td><td class="r">$412,000</td></tr>
+          <tr><td class="p">Lakeside cabin</td><td class="m">R. Martins</td><td><span class="pill mu">Paused</span></td><td class="m">Dec 01</td><td class="r">$61,750</td></tr>
+          <tr><td class="p">Garden studio</td><td class="m">E. Brandt</td><td><span class="pill pl">Planning</span></td><td class="m">Dec 09</td><td class="r">$19,800</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="page" id="detail" style="display:none">
+      <div id="scroller">
+        <div class="hero">
+          <div>
+            <h1>Harbor renovation</h1>
+            <div class="meta"><span>Client <b>Lindqvist &amp; Co</b></span><span>Due <b>Oct 24</b></span><span>Priority <b style="color:#B4361E">High</b></span></div>
+          </div>
+          <div class="acts2"><button class="btn">Share</button><button class="btn pri">Add task</button></div>
+        </div>
+        <div class="prog"><div></div></div>
+        <div class="sub" style="font-size:13px">1 of 12 tasks done · Planning</div>
+        <div class="tabs"><span class="on">Tasks</span><span>Schedule</span><span>Files</span><span>Budget</span></div>
+        <div class="tasks">
+          <div class="task"><span class="chk on"></span><div><b>Site visit and measurements</b><span class="s">Done today</span></div><span class="av who">MC</span><span class="due">Oct 06</span></div>
+          <div class="task"><span class="chk"></span><div><b>Draft scope and estimate</b><span class="s">Waiting on measurements</span></div><span class="av who">MC</span><span class="due">Oct 08</span></div>
+          <div class="task"><span class="chk"></span><div><b>Order materials</b><span class="s">Timber, fixings, sealant</span></div><span class="av who" style="background:#F3E3D0;color:#8A4B12">JO</span><span class="due">Oct 10</span></div>
+          <div class="task"><span class="chk"></span><div><b>Demolition</b><span class="s">2 days · skip booked</span></div><span class="av who" style="background:#DCEFE4;color:#1F6B47">RB</span><span class="due">Oct 13</span></div>
+          <div class="task"><span class="chk"></span><div><b>Framing and structure</b><span class="s">Inspection required</span></div><span class="av who" style="background:#DCEFE4;color:#1F6B47">RB</span><span class="due">Oct 17</span></div>
+          <div class="task"><span class="chk"></span><div><b>Final walkthrough</b><span class="s">With client</span></div><span class="av who">MC</span><span class="due">Oct 24</span></div>
+        </div>
+        <div class="team"><span class="av" style="width:40px;height:40px">+</span><div><div class="t">Bring your crew in</div><div class="s">Invite people to see tasks, upload photos and log hours.</div></div><button class="btn pri" id="invite">Invite team</button></div>
+        <div style="height:300px"></div>
+      </div>
+    </section>
+
+  </main>
+    <div class="scrim" id="scrim" style="display:none"></div>
+    <div class="modal" id="modal" style="display:none">
+      <h2>New project</h2>
+      <div class="sub">Set it up once. Tasks, schedule and budget follow.</div>
+      <div class="f"><label>Project name</label><div class="in" id="name"></div></div>
+      <div class="f"><label>Client</label><div class="in" id="client"></div></div>
+      <div class="row2">
+        <div class="f"><label>Due date</label><div class="in">Oct 24, 2026</div></div>
+        <div class="f"><label>Priority</label><div class="seg" id="seg"><span>Low</span><span class="on" id="pnorm">Normal</span><span class="hi" id="phigh">High</span></div></div>
+      </div>
+      <div class="acts"><button class="btn" id="cancel">Cancel</button><button class="btn pri" id="create">Create project</button></div>
+    </div>
+    <div class="toast" id="toast" style="display:none"><i></i>Project created</div>
+</div>
+<script>
+// ───────── the timeline (seconds) ─────────
+const NAME = 'Harbor renovation', CLIENT = 'Lindqvist & Co';
+// per-character typing times: natural rhythm (fixed jitter table, no randomness)
+const JIT = [1.0, 0.8, 1.3, 0.9, 1.1, 0.7, 1.6, 0.9, 1.0, 1.2, 0.8, 1.0, 1.4, 0.9, 1.1, 0.8, 1.0, 1.2, 0.9, 1.0];
+const typeTimes = (t0, text, cps) => { const out = []; let a = t0; for (let i = 0; i < text.length; i++) { a += JIT[i % JIT.length] / cps; out.push(a); } return out; };
+const T = {
+  hoverNew: 1.15, clickNew: 1.45, modalIn: 1.5,
+  clickName: 2.3, nameTimes: typeTimes(2.42, NAME, 14),
+  clickClient: 4.0, clientTimes: typeTimes(4.12, CLIENT, 15),
+  clickHigh: 5.35, hoverCreate: 5.85, clickCreate: 6.1, modalOut: 6.15,
+  navigate: 6.55, scroll0: 7.55, scroll1: 8.35, scrollBy: 250,
+  hoverInvite: 8.75, clickInvite: 9.0, end: 9.6,
+};
+window.__duration = T.end;
+// Steps + events the generator turns into the capture's events/steps/marks.
+window.__script = [
+  { id: 'open', type: 'mark', t: 0.3 },
+  { id: 'new-project', type: 'click', t: T.clickNew, target: '#new', label: 'New project', t0: 1.0, t1: 1.8 },
+  { id: 'name', type: 'type', t: T.nameTimes[0] - 0.12, t1: T.nameTimes.at(-1), target: '#name', click: T.clickName, text: NAME, t0: 2.2 },
+  { id: 'client', type: 'type', t: T.clientTimes[0] - 0.12, t1: T.clientTimes.at(-1), target: '#client', click: T.clickClient, text: CLIENT, t0: 3.9 },
+  { id: 'priority', type: 'click', t: T.clickHigh, target: '#phigh', label: 'High', t0: 5.2, t1: 5.5 },
+  { id: 'create', type: 'click', t: T.clickCreate, target: '#create', label: 'Create project', t0: 5.7, t1: 6.4 },
+  { id: 'created', type: 'mark', t: 6.3 },
+  { id: 'open-project', type: 'navigate', t: T.navigate, url: '/projects/harbor-renovation', t0: 6.5, t1: 6.8 },
+  { id: 'scroll-tasks', type: 'scroll', t: T.scroll0, t1: T.scroll1, from: 0, to: T.scrollBy, t0: 7.5, t1s: 8.4 },
+  { id: 'invite', type: 'click', t: T.clickInvite, target: '#invite', label: 'Invite team', t0: 8.6, t1: 9.2 },
+  { id: 'done', type: 'mark', t: 9.4 },
+];
+const $ = (s) => document.querySelector(s);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = (u) => { u = clamp(u); return u < 0.5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; };
+const out3 = (u) => 1 - Math.pow(1 - clamp(u), 3);
+const nTyped = (times, t) => times.filter((x) => x <= t).length;
+function field(el, text, typedN, focused, t, placeholder) {
+  const s = text.slice(0, typedN);
+  const caret = focused && Math.floor(t / 0.53) % 2 === 0 ? '<span class="caret"></span>' : '';
+  el.innerHTML = s ? s.replace(/&/g, '&amp;') + caret : caret + `<span class="ph">${placeholder}</span>`;
+  el.classList.toggle('focus', focused);
+}
+window.__seek = (t) => {
+  const onDetail = t >= T.navigate;
+  $('#list').style.display = onDetail ? 'none' : '';
+  $('#detail').style.display = onDetail ? '' : 'none';
+  $('#crumb').innerHTML = onDetail ? 'Projects / <b>Harbor renovation</b>' : 'Workspace / <b>Projects</b>';
+  $('#new').style.display = onDetail ? 'none' : '';
+  // new-project button hover/press
+  $('#new').classList.toggle('hover', t >= T.hoverNew && t < T.modalIn + 0.1);
+  $('#new').classList.toggle('press', t >= T.clickNew && t < T.clickNew + 0.1);
+  // modal
+  const mIn = out3((t - T.modalIn) / 0.28), mOut = ease((t - T.modalOut) / 0.22);
+  const vis = t >= T.modalIn && mOut < 1;
+  const a = vis ? mIn * (1 - mOut) : 0;
+  for (const id of ['#scrim', '#modal']) $(id).style.display = vis ? '' : 'none';
+  $('#scrim').style.opacity = a;
+  $('#modal').style.opacity = a;
+  $('#modal').style.transform = `translateY(${(1 - mIn) * 14 + mOut * 8}px) scale(${0.98 + 0.02 * mIn - 0.01 * mOut})`;
+  const fName = t >= T.clickName && t < T.clickClient, fClient = t >= T.clickClient && t < T.clickHigh;
+  field($('#name'), NAME, nTyped(T.nameTimes, t), fName, t, 'e.g. Kitchen remodel');
+  field($('#client'), CLIENT, nTyped(T.clientTimes, t), fClient, t, 'Company or person');
+  const high = t >= T.clickHigh;
+  $('#pnorm').classList.toggle('on', !high);
+  $('#phigh').classList.toggle('on', high);
+  $('#create').classList.toggle('hover', t >= T.hoverCreate && t < T.modalOut);
+  $('#create').classList.toggle('press', t >= T.clickCreate && t < T.clickCreate + 0.1);
+  // toast
+  const tIn = out3((t - (T.clickCreate + 0.15)) / 0.3), tOut = ease((t - (T.clickCreate + 2.1)) / 0.25);
+  $('#toast').style.display = t >= T.clickCreate + 0.15 && tOut < 1 ? '' : 'none';
+  $('#toast').style.opacity = tIn * (1 - tOut);
+  $('#toast').style.transform = `translateY(${(1 - tIn) * 16}px)`;
+  // detail page: content settles in, then scrolls
+  const dIn = out3((t - T.navigate) / 0.3);
+  const sc = ease((t - T.scroll0) / (T.scroll1 - T.scroll0)) * T.scrollBy;
+  $('#scroller').style.opacity = onDetail ? dIn : 1;
+  $('#scroller').style.transform = `translateY(${(1 - dIn) * 10 - sc}px)`;
+  $('.prog div').style.width = (8 + 0 * t) + '%';
+  $('#invite').classList.toggle('hover', t >= T.hoverInvite);
+  $('#invite').classList.toggle('press', t >= T.clickInvite && t < T.clickInvite + 0.1);
+  window.__scrollY = sc;
+};
+window.__seek(0);
+</script>
+</body>
+</html>

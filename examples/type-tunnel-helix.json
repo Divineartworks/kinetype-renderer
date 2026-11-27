@@ -1,0 +1,29 @@
+{
+  "template": "type-tunnel",
+  "name": "type-tunnel-helix",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 14,
+  "bpm": 120,
+  "seed": 5,
+  "content": {
+    "words": [
+      "DEEPER",
+      "SPIRAL",
+      "DOWN",
+      "AGAIN"
+    ],
+    "finale": "VORTEX",
+    "sub": "EP. 07 \u2014 OUT FRIDAY"
+  },
+  "rules": {
+    "beatCoverage": {
+      "dense": 16,
+      "then": 2,
+      "until": 22
+    }
+  },
+  "params": {
+    "style": "helix"
+  }
+}

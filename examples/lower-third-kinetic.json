@@ -1,0 +1,12 @@
+{
+  "template": "lower-third",
+  "name": "lower-third-kinetic",
+  "format": "vertical",
+  "fps": 60,
+  "duration": 6,
+  "bpm": 128,
+  "seed": 9,
+  "content": { "name": "Techhalla", "role": "Stealable workflows", "handle": "@techhalla", "position": "bottom-left" },
+  "params": { "style": "kinetic", "preview": "dark" },
+  "render": { "transparent": false, "formats": ["mp4"] }
+}

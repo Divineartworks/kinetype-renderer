@@ -1,0 +1,27 @@
+{
+  "template": "brand-card",
+  "name": "brand-card-benefit",
+  "format": "landscape",
+  "fps": 30,
+  "seed": 3,
+  "content": {
+    "mode": "benefit",
+    "headline": "Why teams switch",
+    "lines": [
+      "Start a project in one click",
+      "Tasks set up for you",
+      "Everyone sees the same page"
+    ],
+    "numerals": true,
+    "product": {
+      "capture": "cap",
+      "at": "invite",
+      "urlLabel": "app.fieldnote.dev"
+    }
+  },
+  "media": {
+    "cap": {
+      "capture": "../fixtures/captures/demo-app-desktop/capture.json"
+    }
+  }
+}

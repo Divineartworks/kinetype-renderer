@@ -1,0 +1,18 @@
+{
+  "template": "split-flap",
+  "name": "split-flap-led",
+  "format": "landscape",
+  "seed": 21,
+  "bpm": 128,
+  "content": {
+    "title": "HIGH SCORES",
+    "columns": { "main": "PLAYER", "status": "SCORE" },
+    "rows": [
+      { "text": "1. NOVA", "status": "98,410", "statusColor": "a" },
+      { "text": "2. KITE", "status": "91,002" },
+      { "text": "3. ORBIT", "status": "87,650" },
+      { "text": "4. VANTA", "status": "80,115", "then": { "status": "99,999", "statusColor": "b" } }
+    ]
+  },
+  "params": { "style": "arcade-led" }
+}

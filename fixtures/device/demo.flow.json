@@ -1,0 +1,22 @@
+{
+  "schema": "kinetype.flow.v1",
+  "name": "device-demo",
+  "app": { "name": "Verkstedlogg (fixture)", "baseUrl": "http://10.0.2.2:8787" },
+  "device": { "kind": "android", "target": { "browser": "chrome", "transport": "adb" } },
+  "tempo": { "preset": "demo-artist" },
+  "seed": 21,
+  "calibrate": "overlay",
+  "setup": [{ "action": "request", "method": "POST", "url": "/api/reset" }],
+  "steps": [
+    { "id": "open-list", "action": "goto", "url": "/#/", "hold": 0.6 },
+    { "id": "find-job", "action": "scroll", "target": { "role": "link", "name": "Takrenne – Solberg", "exact": true } },
+    { "id": "open-job", "action": "tap", "target": { "role": "link", "name": "Takrenne – Solberg", "exact": true }, "label": "Takrenne – Solberg", "hold": 0.5 },
+    { "id": "add-extra", "action": "tap", "target": { "role": "button", "name": "Legg til ekstraarbeid" }, "label": "Legg til ekstraarbeid", "hold": 0.3 },
+    { "id": "describe", "action": "type", "target": { "role": "textbox", "name": "Beskrivelse" }, "value": "Ny nedløpsrenne, 3 m" },
+    { "id": "amount", "action": "type", "target": { "role": "textbox", "name": "Beløp" }, "value": "2450" },
+    { "id": "send", "action": "tap", "target": { "role": "button", "name": "Send til kunden" }, "label": "Send til kunden" },
+    { "id": "sent-status", "action": "waitFor", "target": { "role": "status", "name": "Sendt til kunden" }, "timeout": 10 },
+    { "id": "sent", "action": "mark" },
+    { "id": "back-to-list", "action": "tap", "target": { "role": "button", "name": "Tilbake til jobber" }, "hold": 0.6 }
+  ]
+}
